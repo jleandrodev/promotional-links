@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { ContainerGlass } from './ContainerGlass';
 import { ButtonGlow } from './ButtonGlow';
-import { useRouter } from 'next/navigation';
 
 import type { Answer } from '../page';
 
@@ -19,8 +18,6 @@ interface ResultScreenProps {
 }
 
 export function ResultScreen({ answers }: ResultScreenProps) {
-  const router = useRouter();
-
   const getPersonalizedInsights = () => {
     const insights = [];
 
@@ -68,7 +65,7 @@ export function ResultScreen({ answers }: ResultScreenProps) {
   const insights = getPersonalizedInsights();
 
   const handleCheckout = () => {
-    router.push('/checkout');
+    window.location.href = 'https://pay.kiwify.com.br/eON8FRD';
   };
 
   return (
