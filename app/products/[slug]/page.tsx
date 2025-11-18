@@ -7,10 +7,15 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 
 export async function generateStaticParams() {
-  const products = await getProducts(100)
-  return products.map((product) => ({
-    slug: product.slug,
-  }))
+  try {
+    const products = await getProducts(100)
+    return products.map((product) => ({
+      slug: product.slug,
+    }))
+  } catch (error) {
+    console.error('Error generating static params for products:', error)
+    return []
+  }
 }
 
 export async function generateMetadata({
