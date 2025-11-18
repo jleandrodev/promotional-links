@@ -36,7 +36,11 @@ A modern, SEO-optimized blog and product hub for natural health and wellness con
    ```env
    NEXT_PUBLIC_SUPABASE_URL=https://suiqgdobvvdycovmvqjr.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1aXFnZG9idnZkeWNvdm12cWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MjE1MDAsImV4cCI6MjA3ODk5NzUwMH0.6qQIr80l9xNqHOULrmajzUjuOnAZjxo_PQB12AQH--M
+   # Para desenvolvimento local (Direct Connection)
    DATABASE_URL=postgresql://postgres:[YOUR_PASSWORD]@db.suiqgdobvvdycovmvqjr.supabase.co:5432/postgres
+   
+   # Para produção/Vercel (Connection Pooling - RECOMENDADO)
+   # DATABASE_URL=postgresql://postgres.[PROJECT_REF]:[PASSWORD]@aws-0-[REGION].pooler.supabase.com:6543/postgres?pgbouncer=true
    NEXT_PUBLIC_SITE_URL=https://nutrahub.com
    ```
 
