@@ -1,4 +1,4 @@
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 
 /**
  * Revalida todas as páginas relacionadas a posts
@@ -6,21 +6,6 @@ import { revalidatePath, revalidateTag } from 'next/cache'
  */
 export async function revalidateBlogPages(postSlug?: string, categorySlugs?: string[]) {
   try {
-    // Revalidar tags específicas - isso força a revalidação imediata do cache
-    revalidateTag('blog-posts')
-    revalidateTag('blog-post-list')
-    revalidateTag('categories')
-    
-    if (postSlug) {
-      revalidateTag(`blog-post-${postSlug}`)
-    }
-    
-    if (categorySlugs && categorySlugs.length > 0) {
-      categorySlugs.forEach((slug) => {
-        revalidateTag(`category-${slug}`)
-      })
-    }
-
     // Revalidar paths específicos - garante que as páginas sejam regeneradas
     revalidatePath('/', 'page')
     revalidatePath('/blog', 'page')
@@ -46,12 +31,6 @@ export async function revalidateBlogPages(postSlug?: string, categorySlugs?: str
  */
 export async function revalidateProductPages(productSlug?: string) {
   try {
-    revalidateTag('products')
-    revalidateTag('product-list')
-    if (productSlug) {
-      revalidateTag(`product-${productSlug}`)
-    }
-
     revalidatePath('/', 'page')
     revalidatePath('/products', 'page')
     if (productSlug) {
