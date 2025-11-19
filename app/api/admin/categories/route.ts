@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
 
@@ -70,6 +71,11 @@ export async function POST(request: Request) {
         order: body.order || 0,
       },
     })
+
+    // Revalidar cache das páginas afetadas
+    revalidatePath('/')
+    revalidatePath('/categories')
+    revalidatePath(`/categories/${category.slug}`)
 
     return NextResponse.json(category)
   } catch (error: any) {

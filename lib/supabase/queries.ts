@@ -1,7 +1,8 @@
 import { prisma } from '@/lib/prisma'
+import { unstable_cache } from 'next/cache'
 import type { BlogPost, Category, Product, HomeContent } from '@prisma/client'
 
-export async function getBlogPosts(limit = 10, categoryId?: string) {
+async function _getBlogPosts(limit = 10, categoryId?: string) {
   const posts = await prisma.blogPost.findMany({
     where: {
       published: true,
@@ -34,7 +35,18 @@ export async function getBlogPosts(limit = 10, categoryId?: string) {
   }))
 }
 
-export async function getBlogPostBySlug(slug: string) {
+export async function getBlogPosts(limit = 10, categoryId?: string) {
+  return unstable_cache(
+    async () => _getBlogPosts(limit, categoryId),
+    [`blog-posts-${limit}-${categoryId || 'all'}`],
+    {
+      tags: ['blog-posts', 'blog-post-list'],
+      revalidate: 60,
+    }
+  )()
+}
+
+async function _getBlogPostBySlug(slug: string) {
   const post = await prisma.blogPost.findFirst({
     where: {
       slug,
@@ -59,6 +71,17 @@ export async function getBlogPostBySlug(slug: string) {
   }
 }
 
+export async function getBlogPostBySlug(slug: string) {
+  return unstable_cache(
+    async () => _getBlogPostBySlug(slug),
+    [`blog-post-${slug}`],
+    {
+      tags: ['blog-posts', `blog-post-${slug}`],
+      revalidate: 60,
+    }
+  )()
+}
+
 export async function getCategories() {
   return await prisma.category.findMany({
     orderBy: {
@@ -67,7 +90,7 @@ export async function getCategories() {
   })
 }
 
-export async function getCategoryBySlug(slug: string) {
+async function _getCategoryBySlug(slug: string) {
   const category = await prisma.category.findFirst({
     where: { slug },
   })
@@ -106,6 +129,17 @@ export async function getCategoryBySlug(slug: string) {
       categories: pc.post.postCategories.map((pcc) => pcc.category),
     })),
   }
+}
+
+export async function getCategoryBySlug(slug: string) {
+  return unstable_cache(
+    async () => _getCategoryBySlug(slug),
+    [`category-${slug}`],
+    {
+      tags: ['categories', `category-${slug}`],
+      revalidate: 60,
+    }
+  )()
 }
 
 export async function getProducts(limit = 10) {

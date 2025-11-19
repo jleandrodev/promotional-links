@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
 
@@ -73,6 +74,9 @@ export async function PUT(request: Request) {
             newsletterSubtitle: normalizeField(body.newsletterSubtitle),
           },
         })
+
+    // Revalidar cache da página inicial
+    revalidatePath('/')
 
     return NextResponse.json(content)
   } catch (error) {

@@ -45,6 +45,9 @@ export async function generateMetadata({
   }
 }
 
+// Revalidar a cada 60 segundos para garantir conteúdo atualizado
+export const revalidate = 60
+
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const category = await getCategoryBySlug(slug).catch(() => null)

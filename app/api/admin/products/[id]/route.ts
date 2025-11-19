@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
 
@@ -63,6 +64,11 @@ export async function PUT(
       },
     })
 
+    // Revalidar cache das páginas afetadas
+    revalidatePath('/')
+    revalidatePath('/products')
+    revalidatePath(`/products/${product.slug}`)
+
     return NextResponse.json(product)
   } catch (error) {
     console.error('Error updating product:', error)
@@ -85,9 +91,22 @@ export async function DELETE(
     }
 
     const { id } = await params
+    
+    // Buscar o produto antes de deletar para revalidar as páginas corretas
+    const product = await prisma.product.findUnique({
+      where: { id },
+    })
+
     await prisma.product.delete({
       where: { id },
     })
+
+    // Revalidar cache das páginas afetadas
+    revalidatePath('/')
+    revalidatePath('/products')
+    if (product?.slug) {
+      revalidatePath(`/products/${product.slug}`)
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {

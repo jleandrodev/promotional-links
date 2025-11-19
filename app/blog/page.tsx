@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   },
 }
 
+// Revalidar a cada 60 segundos para garantir conteúdo atualizado
+export const revalidate = 60
+
 export default async function BlogPage() {
   const posts = await getBlogPosts(50)
 

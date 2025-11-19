@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
+import { revalidateBlogPages } from '@/lib/revalidate'
 
 export async function POST(request: Request) {
   try {
@@ -44,6 +45,13 @@ export async function POST(request: Request) {
         product: true,
       },
     })
+
+    // Revalidar cache das páginas afetadas imediatamente
+    const categorySlugs = post.postCategories
+      .map((pc) => pc.category?.slug)
+      .filter((slug): slug is string => Boolean(slug))
+    
+    await revalidateBlogPages(post.slug, categorySlugs)
 
     return NextResponse.json({
       ...post,

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
+import { revalidateBlogPages } from '@/lib/revalidate'
 
 export async function GET(
   request: Request,
@@ -96,6 +97,13 @@ export async function PUT(
       },
     })
 
+    // Revalidar cache das páginas afetadas imediatamente
+    const categorySlugs = post.postCategories
+      .map((pc) => pc.category?.slug)
+      .filter((slug): slug is string => Boolean(slug))
+    
+    await revalidateBlogPages(post.slug, categorySlugs)
+
     return NextResponse.json({
       ...post,
       categories: post.postCategories.map((pc) => pc.category),
@@ -121,9 +129,29 @@ export async function DELETE(
     }
 
     const { id } = await params
+    
+    // Buscar o post antes de deletar para revalidar as páginas corretas
+    const post = await prisma.blogPost.findUnique({
+      where: { id },
+      include: {
+        postCategories: {
+          include: {
+            category: true,
+          },
+        },
+      },
+    })
+
     await prisma.blogPost.delete({
       where: { id },
     })
+
+    // Revalidar cache das páginas afetadas imediatamente
+    const categorySlugs = post?.postCategories
+      .map((pc) => pc.category?.slug)
+      .filter((slug): slug is string => Boolean(slug)) || []
+    
+    await revalidateBlogPages(post?.slug, categorySlugs)
 
     return NextResponse.json({ success: true })
   } catch (error) {

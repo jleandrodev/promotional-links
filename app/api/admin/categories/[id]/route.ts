@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
 
@@ -90,6 +91,11 @@ export async function PUT(
       },
     })
 
+    // Revalidar cache das páginas afetadas
+    revalidatePath('/')
+    revalidatePath('/categories')
+    revalidatePath(`/categories/${category.slug}`)
+
     return NextResponse.json(category)
   } catch (error: any) {
     console.error('Error updating category:', error)
@@ -115,9 +121,22 @@ export async function DELETE(
     }
 
     const { id } = await params
+    
+    // Buscar a categoria antes de deletar para revalidar as páginas corretas
+    const category = await prisma.category.findUnique({
+      where: { id },
+    })
+
     await prisma.category.delete({
       where: { id },
     })
+
+    // Revalidar cache das páginas afetadas
+    revalidatePath('/')
+    revalidatePath('/categories')
+    if (category?.slug) {
+      revalidatePath(`/categories/${category.slug}`)
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
