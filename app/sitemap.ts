@@ -1,8 +1,17 @@
 import { MetadataRoute } from 'next'
+import { headers } from 'next/headers'
 import { prisma } from '@/lib/prisma'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'
+  // Detectar o domínio da requisição atual ou usar a variável de ambiente
+  const headersList = await headers()
+  const host = headersList.get('host') || headersList.get('x-forwarded-host')
+  const protocol = headersList.get('x-forwarded-proto') || 'https'
+  
+  // Se houver host na requisição, usar ele; caso contrário, usar a variável de ambiente
+  const baseUrl = host 
+    ? `${protocol}://${host}`
+    : (process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.life')
 
   try {
     // Busca todos os dados em paralelo
