@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
@@ -100,7 +101,16 @@ export default function Sidebar() {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 border-b border-gray-200">
-            <h1 className="text-2xl font-bold text-[#053d42]">NutraHub Admin</h1>
+            <Link href="/adminpanel" className="flex items-center">
+              <Image
+                src="/images/logo.svg"
+                alt="NutraHub"
+                width={150}
+                height={45}
+                className="h-10 w-auto"
+                priority
+              />
+            </Link>
           </div>
 
           {/* Navigation */}

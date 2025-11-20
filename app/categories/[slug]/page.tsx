@@ -34,12 +34,12 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${category.name} - Health & Wellness Category`,
-    description: category.description || `Explore ${category.name} articles and guides on NutraHub`,
+    title: category.seoTitle || `${category.name} - Health & Wellness Category`,
+    description: category.seoDescription || category.description || `Explore ${category.name} articles and guides on NutraHub`,
     keywords: `${category.name}, health, wellness, natural remedies`,
     openGraph: {
-      title: `${category.name} - NutraHub`,
-      description: category.description || `Explore ${category.name} articles and guides`,
+      title: category.seoTitle || `${category.name} - NutraHub`,
+      description: category.seoDescription || category.description || `Explore ${category.name} articles and guides`,
       type: 'website',
     },
   }
@@ -90,9 +90,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         <div className="bg-gradient-to-r from-[#086972] to-[#0b95a2] py-16">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{category.name}</h1>
-            {category.description && (
-              <p className="text-xl text-white/90">{category.description}</p>
-            )}
           </div>
         </div>
 
@@ -102,38 +99,50 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               <p className="text-gray-600 text-lg">No posts in this category yet.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
-                <article
-                  key={post.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-                >
-                  <Link href={`/blog/${post.slug}`}>
-                    <div className="relative h-48 w-full bg-gray-100">
-                      {post.featuredImage ? (
-                        <Image
-                          src={post.featuredImage}
-                          alt={post.title}
-                          fill
-                          className="object-cover object-center"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-[#086972] to-[#0b95a2]" />
-                      )}
-                    </div>
-                    <div className="p-6">
-                      <h2 className="text-xl font-bold text-[#053d42] mb-2 line-clamp-2">
-                        {post.title}
-                      </h2>
-                      <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
-                      <span className="text-[#086972] font-semibold hover:text-[#0b95a2] transition-colors">
-                        Read More →
-                      </span>
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {posts.map((post) => (
+                  <article
+                    key={post.id}
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+                  >
+                    <Link href={`/blog/${post.slug}`}>
+                      <div className="relative h-48 w-full bg-gray-100">
+                        {post.featuredImage ? (
+                          <Image
+                            src={post.featuredImage}
+                            alt={post.title}
+                            fill
+                            className="object-cover object-center"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-[#086972] to-[#0b95a2]" />
+                        )}
+                      </div>
+                      <div className="p-6">
+                        <h2 className="text-xl font-bold text-[#053d42] mb-2 line-clamp-2">
+                          {post.title}
+                        </h2>
+                        <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                        <span className="text-[#086972] font-semibold hover:text-[#0b95a2] transition-colors">
+                          Read More →
+                        </span>
+                      </div>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+              
+              {/* SEO Description abaixo da listagem */}
+              {category.description && (
+                <div className="mt-12 pt-8 border-t border-gray-200">
+                  <div
+                    className="blog-content prose prose-lg max-w-none"
+                    dangerouslySetInnerHTML={{ __html: category.description }}
+                  />
+                </div>
+              )}
+            </>
           )}
         </div>
       </main>

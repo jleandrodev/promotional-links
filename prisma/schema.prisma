@@ -19,6 +19,8 @@ model Category {
   parentId    String?   @map("parent_id")
   isPillar     Boolean   @default(false) @map("is_pillar")
   order       Int       @default(0)
+  seoTitle    String?   @map("seo_title") @db.VarChar(255)
+  seoDescription String? @map("seo_description") @db.Text
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 

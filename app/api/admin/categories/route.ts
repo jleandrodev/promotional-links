@@ -69,6 +69,8 @@ export async function POST(request: Request) {
         parentId: body.parentId || null,
         isPillar: body.isPillar || false,
         order: body.order || 0,
+        seoTitle: body.seoTitle || null,
+        seoDescription: body.seoDescription || null,
       },
     })
 

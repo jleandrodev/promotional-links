@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Category } from '@prisma/client'
+import RichTextEditor from '../../components/RichTextEditor'
 
 export default function EditCategoryPage() {
   const params = useParams()
@@ -19,6 +20,8 @@ export default function EditCategoryPage() {
     parentId: '',
     isPillar: false,
     order: 0,
+    seoTitle: '',
+    seoDescription: '',
   })
   const [categories, setCategories] = useState<Category[]>([])
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -58,6 +61,8 @@ export default function EditCategoryPage() {
             parentId: data.parentId || '',
             isPillar: data.isPillar || false,
             order: data.order || 0,
+            seoTitle: data.seoTitle || '',
+            seoDescription: data.seoDescription || '',
           })
           if (data.image) {
             setImagePreview(data.image)
@@ -226,14 +231,17 @@ export default function EditCategoryPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
-            <textarea
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              rows={4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#086972]"
-              placeholder="Category description"
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Description (HTML) - Texto de SEO que aparece abaixo da listagem de blogposts
+            </label>
+            <RichTextEditor
+              content={formData.description || ''}
+              onChange={(html) => setFormData({ ...formData, description: html })}
+              placeholder="Digite a descrição da categoria aqui. Este texto aparecerá como conteúdo de SEO abaixo da listagem de blogposts. Use os botões da toolbar para formatar o texto..."
             />
+            <p className="text-xs text-gray-500 mt-2">
+              O conteúdo é salvo automaticamente em HTML. Você pode visualizar a formatação em tempo real.
+            </p>
           </div>
 
           <div>
@@ -296,6 +304,34 @@ export default function EditCategoryPage() {
             />
             <p className="text-xs text-gray-500 mt-1">
               Display order (lower numbers appear first)
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">SEO Title</label>
+            <input
+              type="text"
+              value={formData.seoTitle || ''}
+              onChange={(e) => setFormData({ ...formData, seoTitle: e.target.value })}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#086972]"
+              placeholder="SEO title for search engines (55-70 characters recommended)"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Título otimizado para SEO. Se não preenchido, será usado o nome da categoria.
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">SEO Description</label>
+            <textarea
+              value={formData.seoDescription || ''}
+              onChange={(e) => setFormData({ ...formData, seoDescription: e.target.value })}
+              rows={3}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#086972]"
+              placeholder="SEO description for search engines (140-160 characters recommended)"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Descrição otimizada para SEO. Se não preenchida, será usada a descrição da categoria.
             </p>
           </div>
 

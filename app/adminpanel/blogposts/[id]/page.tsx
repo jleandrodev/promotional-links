@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import type { BlogPost } from '@prisma/client'
+import RichTextEditor from '../../components/RichTextEditor'
 
 export default function BlogPostEditPage() {
   const params = useParams()
@@ -255,14 +256,17 @@ export default function BlogPostEditPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Content (HTML)</label>
-            <textarea
-              value={post.content}
-              onChange={(e) => setPost({ ...post, content: e.target.value })}
-              required
-              rows={15}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#086972] font-mono text-sm"
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Content (HTML) - Use o editor abaixo para formatar o conteúdo
+            </label>
+            <RichTextEditor
+              content={post.content || ''}
+              onChange={(html) => setPost({ ...post, content: html })}
+              placeholder="Digite o conteúdo do blogpost aqui. Use os botões da toolbar para formatar o texto..."
             />
+            <p className="text-xs text-gray-500 mt-2">
+              O conteúdo é salvo automaticamente em HTML. Você pode visualizar a formatação em tempo real.
+            </p>
           </div>
 
           <div>
