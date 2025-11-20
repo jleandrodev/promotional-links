@@ -1,9 +1,28 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
-import type { Product } from '@prisma/client'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+
+interface SerializedProduct {
+  id: string
+  name: string
+  slug: string
+  description: string
+  excerpt: string | null
+  image: string | null
+  price: number | null
+  link: string | null
+  featured: boolean
+  createdAt: Date
+  updatedAt: Date
+}
 
 interface ProductsSectionProps {
-  products: Product[]
+  products: SerializedProduct[]
 }
 
 export default function ProductsSection({ products }: ProductsSectionProps) {
@@ -21,45 +40,65 @@ export default function ProductsSection({ products }: ProductsSectionProps) {
             View All →
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={24}
+          slidesPerView={1}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+          navigation
+          autoplay={{
+            delay: 7000,
+            disableOnInteraction: false,
+          }}
+          className="pb-12"
+        >
           {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-            >
-              <Link href={`/products/${product.slug}`}>
-                <div className="relative h-64 w-full">
-                  {product.image ? (
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#086972] to-[#0b95a2] flex items-center justify-center">
-                      <span className="text-white text-2xl font-bold">
-                        {product.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#053d42] mb-2">{product.name}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
-                  {product.price && (
-                    <p className="text-2xl font-bold text-[#086972] mb-4">
-                      ${product.price.toFixed(2)}
-                    </p>
-                  )}
-                  <span className="inline-block bg-[#086972] text-white px-6 py-2 rounded-lg hover:bg-[#0b95a2] transition-colors">
-                    View Product
-                  </span>
-                </div>
-              </Link>
-            </div>
+            <SwiperSlide key={product.id}>
+              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow h-full">
+                <Link href={`/products/${product.slug}`}>
+                  <div className="relative h-64 w-full">
+                    {product.image ? (
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-[#086972] to-[#0b95a2] flex items-center justify-center">
+                        <span className="text-white text-2xl font-bold">
+                          {product.name.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-[#053d42] mb-2">{product.name}</h3>
+                    <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
+                    {product.price && (
+                      <p className="text-2xl font-bold text-[#086972] mb-4">
+                        ${product.price.toFixed(2)}
+                      </p>
+                    )}
+                    <span className="inline-block bg-[#086972] text-white px-6 py-2 rounded-lg hover:bg-[#0b95a2] transition-colors">
+                      View Product
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   )

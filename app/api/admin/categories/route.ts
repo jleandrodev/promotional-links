@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
+import { revalidateCategoryPages } from '@/lib/revalidate'
 
 export async function GET() {
   try {
@@ -74,10 +74,8 @@ export async function POST(request: Request) {
       },
     })
 
-    // Revalidar cache das páginas afetadas
-    revalidatePath('/')
-    revalidatePath('/categories')
-    revalidatePath(`/categories/${category.slug}`)
+    // Revalidar cache das páginas afetadas (inclui sitemap)
+    revalidateCategoryPages(category.slug)
 
     return NextResponse.json(category)
   } catch (error: any) {

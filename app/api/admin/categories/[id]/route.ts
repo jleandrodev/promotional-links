@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
+import { revalidateCategoryPages } from '@/lib/revalidate'
 
 export async function GET(
   request: Request,
@@ -93,10 +93,8 @@ export async function PUT(
       },
     })
 
-    // Revalidar cache das páginas afetadas
-    revalidatePath('/')
-    revalidatePath('/categories')
-    revalidatePath(`/categories/${category.slug}`)
+    // Revalidar cache das páginas afetadas (inclui sitemap)
+    revalidateCategoryPages(category.slug)
 
     return NextResponse.json(category)
   } catch (error: any) {
@@ -133,12 +131,8 @@ export async function DELETE(
       where: { id },
     })
 
-    // Revalidar cache das páginas afetadas
-    revalidatePath('/')
-    revalidatePath('/categories')
-    if (category?.slug) {
-      revalidatePath(`/categories/${category.slug}`)
-    }
+    // Revalidar cache das páginas afetadas (inclui sitemap)
+    revalidateCategoryPages(category?.slug)
 
     return NextResponse.json({ success: true })
   } catch (error) {

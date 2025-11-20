@@ -53,16 +53,22 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     notFound()
   }
 
+  // Converter Decimal para número
+  const serializedProduct = {
+    ...product,
+    price: product.price ? Number(product.price) : null,
+  }
+
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: product.name,
-    description: product.description,
-    image: product.image,
-    ...(product.price && {
+    name: serializedProduct.name,
+    description: serializedProduct.description,
+    image: serializedProduct.image,
+    ...(serializedProduct.price && {
       offers: {
         '@type': 'Offer',
-        price: product.price,
+        price: serializedProduct.price,
         priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
       },
@@ -80,35 +86,35 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             <div className="relative w-full aspect-square rounded-lg overflow-hidden">
-              {product.image ? (
+              {serializedProduct.image ? (
                 <Image
-                  src={product.image}
-                  alt={product.name}
+                  src={serializedProduct.image}
+                  alt={serializedProduct.name}
                   fill
                   className="object-cover"
                   priority
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-[#086972] to-[#0b95a2] flex items-center justify-center">
-                  <span className="text-white text-6xl font-bold">{product.name.charAt(0)}</span>
+                  <span className="text-white text-6xl font-bold">{serializedProduct.name.charAt(0)}</span>
                 </div>
               )}
             </div>
             <div>
               <h1 className="text-4xl md:text-5xl font-bold text-[#053d42] mb-6">
-                {product.name}
+                {serializedProduct.name}
               </h1>
-              {product.price && (
+              {serializedProduct.price && (
                 <p className="text-4xl font-bold text-[#086972] mb-6">
-                  ${product.price.toFixed(2)}
+                  ${serializedProduct.price.toFixed(2)}
                 </p>
               )}
               <div className="prose max-w-none mb-8">
-                <p className="text-lg text-gray-700">{product.description}</p>
+                <p className="text-lg text-gray-700">{serializedProduct.description}</p>
               </div>
-              {product.link && (
+              {serializedProduct.link && (
                 <a
-                  href={product.link}
+                  href={serializedProduct.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block bg-[#086972] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[#0b95a2] transition-colors"
@@ -125,11 +131,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="prose prose-lg max-w-none">
               <h2 className="text-3xl font-bold text-[#053d42] mb-6">
-                About {product.name}
+                About {serializedProduct.name}
               </h2>
               <div
                 className="text-gray-700"
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                dangerouslySetInnerHTML={{ __html: serializedProduct.description }}
               />
             </div>
           </div>

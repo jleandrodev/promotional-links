@@ -1,13 +1,25 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import Pagination from './Pagination'
 import type { BlogPost, Category } from '@prisma/client'
 
 interface LatestPostsSectionProps {
   posts: (BlogPost & { categories?: Category[] })[]
+  currentPage?: number
+  totalPages?: number
+  showPagination?: boolean
 }
 
-export default function LatestPostsSection({ posts }: LatestPostsSectionProps) {
+export default function LatestPostsSection({
+  posts,
+  currentPage = 1,
+  totalPages = 1,
+  showPagination = false,
+}: LatestPostsSectionProps) {
   if (!posts || posts.length === 0) return null
+
+  // Limitar a 9 posts por página
+  const displayedPosts = posts.slice(0, 9)
 
   return (
     <section className="py-16 bg-white">
@@ -22,7 +34,7 @@ export default function LatestPostsSection({ posts }: LatestPostsSectionProps) {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {displayedPosts.map((post) => (
             <article
               key={post.id}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
@@ -65,6 +77,13 @@ export default function LatestPostsSection({ posts }: LatestPostsSectionProps) {
             </article>
           ))}
         </div>
+        {showPagination && totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            baseUrl="/"
+          />
+        )}
       </div>
     </section>
   )

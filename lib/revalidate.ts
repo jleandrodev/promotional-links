@@ -1,6 +1,18 @@
 import { revalidatePath } from 'next/cache'
 
 /**
+ * Revalida o sitemap.xml
+ * Garante que o sitemap seja atualizado quando novos conteúdos forem adicionados
+ */
+export function revalidateSitemap() {
+  try {
+    revalidatePath('/sitemap.xml')
+  } catch (error) {
+    console.error('Error revalidating sitemap:', error)
+  }
+}
+
+/**
  * Revalida todas as páginas relacionadas a posts
  * Garante atualização imediata na Vercel em produção
  */
@@ -20,6 +32,9 @@ export async function revalidateBlogPages(postSlug?: string, categorySlugs?: str
         revalidatePath(`/categories/${slug}`, 'page')
       })
     }
+    
+    // Revalidar sitemap quando posts ou categorias são alterados
+    revalidateSitemap()
   } catch (error) {
     console.error('Error revalidating blog pages:', error)
     // Não lançar erro para não quebrar a requisição
@@ -36,8 +51,29 @@ export async function revalidateProductPages(productSlug?: string) {
     if (productSlug) {
       revalidatePath(`/products/${productSlug}`, 'page')
     }
+    
+    // Revalidar sitemap quando produtos são alterados
+    revalidateSitemap()
   } catch (error) {
     console.error('Error revalidating product pages:', error)
+  }
+}
+
+/**
+ * Revalida páginas relacionadas a categorias
+ */
+export function revalidateCategoryPages(categorySlug?: string) {
+  try {
+    revalidatePath('/', 'page')
+    revalidatePath('/categories', 'page')
+    if (categorySlug) {
+      revalidatePath(`/categories/${categorySlug}`, 'page')
+    }
+    
+    // Revalidar sitemap quando categorias são alteradas
+    revalidateSitemap()
+  } catch (error) {
+    console.error('Error revalidating category pages:', error)
   }
 }
 

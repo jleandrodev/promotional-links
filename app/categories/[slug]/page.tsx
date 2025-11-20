@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import Pagination from '../../components/Pagination'
 import { getCategoryBySlug, getCategories } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
 import Script from 'next/script'
@@ -48,15 +49,32 @@ export async function generateMetadata({
 // Revalidar a cada 60 segundos para garantir conteúdo atualizado
 export const revalidate = 60
 
-export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ page?: string }>
+}) {
   const { slug } = await params
+  const paramsSearch = await searchParams
+  const currentPage = parseInt(paramsSearch.page || '1', 10)
+  const postsPerPage = 9
+
   const category = await getCategoryBySlug(slug).catch(() => null)
 
   if (!category) {
     notFound()
   }
 
-  const posts = category.posts || []
+  const allPosts = category.posts || []
+
+  // Calcular paginação
+  const totalPosts = allPosts.length
+  const totalPages = Math.ceil(totalPosts / postsPerPage)
+  const startIndex = (currentPage - 1) * postsPerPage
+  const endIndex = startIndex + postsPerPage
+  const paginatedPosts = allPosts.slice(startIndex, endIndex)
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -66,7 +84,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'}/categories/${category.slug}`,
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: posts.map((post, index) => ({
+      itemListElement: allPosts.map((post, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         item: {
@@ -94,14 +112,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </div>
 
         <div className="container mx-auto px-4 py-16">
-          {posts.length === 0 ? (
+          {paginatedPosts.length === 0 ? (
             <div className="text-center py-16">
               <p className="text-gray-600 text-lg">No posts in this category yet.</p>
             </div>
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                {posts.map((post) => (
+                {paginatedPosts.map((post) => (
                   <article
                     key={post.id}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
@@ -132,6 +150,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                   </article>
                 ))}
               </div>
+
+              {totalPages > 1 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  baseUrl={`/categories/${slug}`}
+                />
+              )}
               
               {/* SEO Description abaixo da listagem */}
               {category.description && (

@@ -25,16 +25,37 @@ export const metadata: Metadata = {
 // Forçar revalidação a cada 60 segundos para garantir que o conteúdo atualizado seja exibido
 export const revalidate = 60
 
-export default async function Home() {
-  const [latestPosts, categories, products, homeContent] = await Promise.all([
-    getBlogPosts(6),
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>
+}) {
+  const params = await searchParams
+  const currentPage = parseInt(params.page || '1', 10)
+  const postsPerPage = 9
+
+  const [allPosts, categories, products, homeContent] = await Promise.all([
+    getBlogPosts(100), // Buscar mais posts para calcular paginação
     getCategories(),
     getProducts(8),
     getHomeContent(),
   ])
 
+  // Calcular paginação
+  const totalPosts = allPosts.length
+  const totalPages = Math.ceil(totalPosts / postsPerPage)
+  const startIndex = (currentPage - 1) * postsPerPage
+  const endIndex = startIndex + postsPerPage
+  const paginatedPosts = allPosts.slice(startIndex, endIndex)
+
   // Get featured posts for carousel (first 3)
-  const featuredPosts = latestPosts.slice(0, 3)
+  const featuredPosts = allPosts.slice(0, 3)
+
+  // Converter Decimal para número para serialização
+  const serializedProducts = products.map((product) => ({
+    ...product,
+    price: product.price ? Number(product.price) : null,
+  }))
 
   return (
     <>
@@ -42,9 +63,14 @@ export default async function Home() {
       <main>
         <HeroCarousel posts={featuredPosts} homeContent={homeContent} />
         <CategoriesSection categories={categories} />
-        <LatestPostsSection posts={latestPosts} />
+        <LatestPostsSection
+          posts={paginatedPosts}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          showPagination={totalPosts > postsPerPage}
+        />
         <ProductBanner homeContent={homeContent} />
-        <ProductsSection products={products} />
+        <ProductsSection products={serializedProducts} />
         <NewsletterSection homeContent={homeContent} />
       </main>
       <Footer />

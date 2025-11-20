@@ -21,7 +21,13 @@ export const metadata: Metadata = {
 export default async function ProductsPage() {
   const products = await getProducts(50)
 
-  const allProducts = products.map((product) => ({
+  // Converter Decimal para número
+  const serializedProducts = products.map((product) => ({
+    ...product,
+    price: product.price ? Number(product.price) : null,
+  }))
+
+  const allProducts = serializedProducts.map((product) => ({
     name: product.name,
     description: product.description,
     image: product.image || '',
@@ -71,7 +77,7 @@ export default async function ProductsPage() {
 
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {products.map((product) => (
+            {serializedProducts.map((product) => (
               <div
                 key={product.id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"

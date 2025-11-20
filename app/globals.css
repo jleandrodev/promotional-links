@@ -172,3 +172,68 @@ body {
   color: inherit;
   padding: 0;
 }
+
+/* Swiper Navigation Arrows - Custom Styling */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 48px !important;
+  height: 48px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 50% !important;
+  color: #086972 !important;
+  transition: all 0.3s ease !important;
+  pointer-events: auto !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+
+.swiper-button-next:hover:not(.swiper-button-disabled),
+.swiper-button-prev:hover:not(.swiper-button-disabled) {
+  background: rgba(255, 255, 255, 1) !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+  background: rgba(255, 255, 255, 0.4) !important;
+  color: #086972 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
+/* Ajustar posicionamento das setas */
+.swiper-button-next {
+  right: 10px !important;
+}
+
+.swiper-button-prev {
+  left: 10px !important;
+}
+
+/* Setas abaixo dos itens para o slider de categorias */
+.categories-swiper {
+  padding-bottom: 60px !important;
+}
+
+.categories-swiper .swiper-button-next,
+.categories-swiper .swiper-button-prev {
+  top: auto !important;
+  bottom: 0 !important;
+  margin-top: 0 !important;
+  position: absolute !important;
+}
+
+.categories-swiper .swiper-button-next {
+  right: calc(50% - 60px) !important;
+}
+
+.categories-swiper .swiper-button-prev {
+  left: calc(50% - 60px) !important;
+}

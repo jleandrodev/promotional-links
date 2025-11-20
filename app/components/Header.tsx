@@ -56,9 +56,12 @@ export default function Header() {
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              <span className="text-[#053d42] cursor-default py-2 block">
+              <Link 
+                href="/blog" 
+                className="text-[#053d42] hover:text-[#086972] transition-colors py-2 block"
+              >
                 Blog
-              </span>
+              </Link>
               {isDropdownOpen && categories.length > 0 && (
                 <div className="absolute top-full left-0 pt-1 w-48">
                   <div className="bg-white rounded-lg shadow-lg border border-gray-200 py-2">
@@ -124,7 +127,13 @@ export default function Header() {
                   Home
                 </Link>
                 <div className="py-2">
-                  <span className="text-[#053d42] font-semibold">Blog</span>
+                  <Link
+                    href="/blog"
+                    className="text-[#053d42] hover:text-[#086972] transition-colors font-semibold block"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Blog
+                  </Link>
                   {categories.length > 0 && (
                     <div className="mt-2 pl-4 flex flex-col gap-2">
                       {categories.map((category) => (
