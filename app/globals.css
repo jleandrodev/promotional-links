@@ -230,10 +230,23 @@ body {
   position: absolute !important;
 }
 
+/* Mobile e Tablet: centralizadas */
 .categories-swiper .swiper-button-next {
   right: calc(50% - 60px) !important;
 }
 
 .categories-swiper .swiper-button-prev {
   left: calc(50% - 60px) !important;
+}
+
+/* Desktop: alinhadas à direita */
+@media (min-width: 1024px) {
+  .categories-swiper .swiper-button-next {
+    right: 10px !important;
+  }
+
+  .categories-swiper .swiper-button-prev {
+    left: auto !important;
+    right: 70px !important;
+  }
 }
