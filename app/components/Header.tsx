@@ -2,10 +2,33 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+interface Category {
+  id: string
+  name: string
+  slug: string
+}
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [categories, setCategories] = useState<Category[]>([])
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/categories')
+        if (response.ok) {
+          const data = await response.json()
+          setCategories(data)
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error)
+      }
+    }
+    fetchCategories()
+  }, [])
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -28,9 +51,30 @@ export default function Header() {
             <Link href="/" className="text-[#053d42] hover:text-[#086972] transition-colors">
               Home
             </Link>
-            <Link href="/categories" className="text-[#053d42] hover:text-[#086972] transition-colors">
-              Categories
-            </Link>
+            <div
+              className="relative"
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
+              <span className="text-[#053d42] cursor-default py-2 block">
+                Blog
+              </span>
+              {isDropdownOpen && categories.length > 0 && (
+                <div className="absolute top-full left-0 pt-1 w-48">
+                  <div className="bg-white rounded-lg shadow-lg border border-gray-200 py-2">
+                    {categories.map((category) => (
+                      <Link
+                        key={category.id}
+                        href={`/categories/${category.slug}`}
+                        className="block px-4 py-2 text-[#053d42] hover:bg-gray-100 transition-colors"
+                      >
+                        {category.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
             <Link href="/products" className="text-[#053d42] hover:text-[#086972] transition-colors">
               Products
             </Link>
@@ -79,13 +123,23 @@ export default function Header() {
                 >
                   Home
                 </Link>
-                <Link
-                  href="/categories"
-                  className="text-[#053d42] hover:text-[#086972] transition-colors py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Categories
-                </Link>
+                <div className="py-2">
+                  <span className="text-[#053d42] font-semibold">Blog</span>
+                  {categories.length > 0 && (
+                    <div className="mt-2 pl-4 flex flex-col gap-2">
+                      {categories.map((category) => (
+                        <Link
+                          key={category.id}
+                          href={`/categories/${category.slug}`}
+                          className="text-[#053d42] hover:text-[#086972] transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {category.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <Link
                   href="/products"
                   className="text-[#053d42] hover:text-[#086972] transition-colors py-2"

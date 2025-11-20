@@ -1,5 +1,6 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import Sidebar from './components/Sidebar'
 import AdminHeader from './components/AdminHeader'
 
@@ -9,6 +10,14 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
+  const isLoginPage = pathname === '/adminpanel/login'
+
+  // Se for a página de login, renderiza apenas o conteúdo sem layout
+  if (isLoginPage) {
+    return <>{children}</>
+  }
+
   return (
     <div className="min-h-screen bg-[#e6e6e6] flex">
       <Sidebar />

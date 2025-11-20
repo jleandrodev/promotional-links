@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { HomeContent } from '@prisma/client'
+import { useRecaptcha } from '@/lib/hooks/useRecaptcha'
 
 interface NewsletterSectionProps {
   homeContent?: HomeContent | null
@@ -10,18 +11,45 @@ interface NewsletterSectionProps {
 export default function NewsletterSection({ homeContent }: NewsletterSectionProps) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+  const { executeRecaptcha } = useRecaptcha()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('loading')
+    setErrorMessage('')
     
-    // TODO: Integrate with email service (e.g., Mailchimp, ConvertKit)
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      // Executar reCAPTCHA v3
+      const recaptchaToken = await executeRecaptcha('newsletter_subscribe')
+
+      if (!recaptchaToken) {
+        setErrorMessage('Erro ao validar segurança. Por favor, recarregue a página e tente novamente.')
+        setStatus('error')
+        return
+      }
+
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, recaptchaToken }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setErrorMessage(data.error || 'Algo deu errado. Tente novamente.')
+        setStatus('error')
+        return
+      }
+
       setStatus('success')
       setEmail('')
-    } catch {
+    } catch (error) {
+      console.error('Error subscribing to newsletter:', error)
+      setErrorMessage('Erro ao conectar com o servidor. Tente novamente.')
       setStatus('error')
     }
   }
@@ -41,7 +69,7 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder="Digite seu email"
               required
               className="flex-1 px-6 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#086972]"
             />
@@ -50,14 +78,14 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
               disabled={status === 'loading'}
               className="bg-[#086972] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0b95a2] transition-colors disabled:opacity-50"
             >
-              {status === 'loading' ? 'Subscribing...' : status === 'success' ? 'Subscribed!' : 'Subscribe'}
+              {status === 'loading' ? 'Cadastrando...' : status === 'success' ? 'Cadastrado!' : 'Inscrever-se'}
             </button>
           </form>
           {status === 'success' && (
-            <p className="mt-4 text-green-600">Thank you for subscribing!</p>
+            <p className="mt-4 text-green-600">Obrigado por se inscrever!</p>
           )}
-          {status === 'error' && (
-            <p className="mt-4 text-red-600">Something went wrong. Please try again.</p>
+          {status === 'error' && errorMessage && (
+            <p className="mt-4 text-red-600">{errorMessage}</p>
           )}
         </div>
       </div>

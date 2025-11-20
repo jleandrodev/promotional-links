@@ -114,3 +114,13 @@ model HomeContent {
   @@map("home_content")
 }
 
+model Newsletter {
+  id        String   @id @default(uuid())
+  email     String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@map("newsletter")
+}
+

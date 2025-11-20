@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getCategories } from "@/lib/supabase/queries";
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
+  const categories = await getCategories().catch(() => []);
 
   return (
     <footer className="bg-[#053d42] text-white py-12">
@@ -55,43 +57,23 @@ export default function Footer() {
           </div>
 
           {/* Categories */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Categories</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/categories/conditions"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Conditions
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/categories/natural-remedies"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Natural Remedies
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/categories/guides"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Guides & Protocols
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/categories/reviews"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Reviews
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {categories.length > 0 && (
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Categories</h4>
+              <ul className="space-y-2">
+                {categories.slice(0, 6).map((category) => (
+                  <li key={category.id}>
+                    <Link
+                      href={`/categories/${category.slug}`}
+                      className="text-gray-300 hover:text-white transition-colors"
+                    >
+                      {category.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Contact */}
           <div>
