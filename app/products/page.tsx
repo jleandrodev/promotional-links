@@ -101,7 +101,7 @@ export default async function ProductsPage() {
                   </div>
                   <div className="p-6">
                     <h2 className="text-xl font-bold text-[#053d42] mb-2">{product.name}</h2>
-                    <p className="text-gray-600 mb-4 line-clamp-3">{product.description}</p>
+                    <p className="text-gray-600 mb-4 line-clamp-3">{product.excerpt || product.description}</p>
                     {product.price && (
                       <p className="text-2xl font-bold text-[#086972] mb-4">
                         ${product.price.toFixed(2)}

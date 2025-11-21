@@ -110,7 +110,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </p>
               )}
               <div className="prose max-w-none mb-8">
-                <p className="text-lg text-gray-700">{serializedProduct.description}</p>
+                <p className="text-lg text-gray-700">{serializedProduct.excerpt || serializedProduct.description}</p>
               </div>
               {serializedProduct.link && (
                 <a
