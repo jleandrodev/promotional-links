@@ -6,16 +6,27 @@ import Pagination from '../components/Pagination'
 import { getBlogPosts } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-  title: 'Blog - Natural Health Articles & Guides',
-  description:
-    'Read expert articles, guides, and research on natural health, supplements, and wellness. Evidence-based information to support your health journey.',
-  keywords: 'health blog, wellness articles, natural health guides, supplement information',
-  openGraph: {
-    title: 'Blog - Natural Health Articles & Guides | NutraHub',
-    description: 'Read expert articles, guides, and research on natural health and wellness.',
-    type: 'website',
-  },
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>
+}): Promise<Metadata> {
+  const params = await searchParams
+  const page = params.page || '1'
+  const canonical = page === '1' ? '/blog' : `/blog?page=${page}`
+
+  return {
+    title: 'Blog - Natural Health Articles & Guides',
+    description:
+      'Read expert articles, guides, and research on natural health, supplements, and wellness. Evidence-based information to support your health journey.',
+    keywords: 'health blog, wellness articles, natural health guides, supplement information',
+    alternates: { canonical },
+    openGraph: {
+      title: 'Blog - Natural Health Articles & Guides | NutraHub',
+      description: 'Read expert articles, guides, and research on natural health and wellness.',
+      type: 'website',
+    },
+  }
 }
 
 // Revalidar a cada 60 segundos para garantir conteúdo atualizado

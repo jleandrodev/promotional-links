@@ -22,10 +22,13 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ page?: string }>
 }): Promise<Metadata> {
   const { slug } = await params
+  const { page } = await searchParams
   const category = await getCategoryBySlug(slug).catch(() => null)
 
   if (!category) {
@@ -34,10 +37,15 @@ export async function generateMetadata({
     }
   }
 
+  const canonical = !page || page === '1' ? `/categories/${slug}` : `/categories/${slug}?page=${page}`
+
   return {
     title: category.seoTitle || `${category.name} - Health & Wellness Category`,
     description: category.seoDescription || category.description || `Explore ${category.name} articles and guides on NutraHub`,
     keywords: `${category.name}, health, wellness, natural remedies`,
+    alternates: {
+      canonical,
+    },
     openGraph: {
       title: category.seoTitle || `${category.name} - NutraHub`,
       description: category.seoDescription || category.description || `Explore ${category.name} articles and guides`,

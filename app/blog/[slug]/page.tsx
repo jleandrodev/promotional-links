@@ -44,6 +44,9 @@ export async function generateMetadata({
     title: post.seoTitle || post.title,
     description: post.seoDescription || post.excerpt,
     keywords: post.seoKeywords || post.title,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
     openGraph: {
       title: post.seoTitle || post.title,
       description: post.seoDescription || post.excerpt,

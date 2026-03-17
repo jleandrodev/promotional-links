@@ -9,17 +9,28 @@ import Footer from './components/Footer'
 import { getBlogPosts, getCategories, getProducts, getHomeContent } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-  title: 'NutraHub - Your Natural Health & Wellness Hub',
-  description:
-    'Discover natural health solutions, expert guides, and quality supplements. Your trusted source for evidence-based wellness information.',
-  keywords: 'natural health, supplements, wellness, herbal remedies, health guides',
-  openGraph: {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>
+}): Promise<Metadata> {
+  const params = await searchParams
+  const page = params.page || '1'
+  const canonical = page === '1' ? '/' : `/?page=${page}`
+
+  return {
     title: 'NutraHub - Your Natural Health & Wellness Hub',
     description:
-      'Discover natural health solutions, expert guides, and quality supplements.',
-    type: 'website',
-  },
+      'Discover natural health solutions, expert guides, and quality supplements. Your trusted source for evidence-based wellness information.',
+    keywords: 'natural health, supplements, wellness, herbal remedies, health guides',
+    alternates: { canonical },
+    openGraph: {
+      title: 'NutraHub - Your Natural Health & Wellness Hub',
+      description:
+        'Discover natural health solutions, expert guides, and quality supplements.',
+      type: 'website',
+    },
+  }
 }
 
 // Forçar revalidação a cada 60 segundos para garantir que o conteúdo atualizado seja exibido

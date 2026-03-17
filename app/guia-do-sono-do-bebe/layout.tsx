@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: 'Guia do Sono do Bebê - Método Comprovado para Bebês Dormirem a Noite Toda',
   description: 'Descubra o método validado e gentil que já ajudou milhares de mães a transformarem as noites. Questionário personalizado para identificar a melhor solução para o sono do seu bebê. Você merece paz, descanso e noites tranquilas.',
   keywords: 'sono do bebê, bebê dormir, método sono bebê, bebê acorda muito, rotina sono bebê, guia sono bebê',
+  alternates: { canonical: '/guia-do-sono-do-bebe' },
   openGraph: {
     title: 'Guia do Sono do Bebê - Método Comprovado para Bebês Dormirem a Noite Toda',
     description: 'Descubra o método validado e gentil que já ajudou milhares de mães a transformarem as noites. Questionário personalizado para identificar a melhor solução para o sono do seu bebê.',

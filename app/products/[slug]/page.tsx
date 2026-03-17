@@ -36,6 +36,9 @@ export async function generateMetadata({
     title: `${product.name} - Natural Health Supplement`,
     description: product.description,
     keywords: `natural supplement, ${product.name}, health product, wellness`,
+    alternates: {
+      canonical: `/products/${slug}`,
+    },
     openGraph: {
       title: `${product.name} - NutraHub`,
       description: product.description,
