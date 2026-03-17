@@ -65,7 +65,10 @@ export default async function CategoriesPage() {
                         {category.name}
                       </h3>
                       {category.description && (
-                        <p className="text-gray-600 line-clamp-3">{category.description}</p>
+                        <div
+                          className="text-gray-600 line-clamp-3 prose prose-sm max-w-none [&_h2]:text-base [&_h2]:font-bold [&_h2]:mb-1 [&_p]:mb-0"
+                          dangerouslySetInnerHTML={{ __html: category.description }}
+                        />
                       )}
                     </div>
                   </Link>

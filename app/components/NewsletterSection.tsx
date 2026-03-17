@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import type { HomeContent } from '@prisma/client'
 import { useRecaptcha } from '@/lib/hooks/useRecaptcha'
 
@@ -55,7 +56,7 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
   }
 
   return (
-    <section className="py-16 bg-[#e6e6e6]">
+    <section id="newsletter" className="py-16 bg-[#e6e6e6]">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#053d42] mb-4">
@@ -64,22 +65,38 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
           {homeContent?.newsletterSubtitle && (
             <p className="text-lg text-gray-600 mb-8">{homeContent.newsletterSubtitle}</p>
           )}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Digite seu email"
-              required
-              className="flex-1 px-6 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#086972]"
-            />
-            <button
-              type="submit"
-              disabled={status === 'loading'}
-              className="bg-[#086972] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0b95a2] transition-colors disabled:opacity-50"
-            >
-              {status === 'loading' ? 'Cadastrando...' : status === 'success' ? 'Cadastrado!' : 'Inscrever-se'}
-            </button>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Digite seu email"
+                required
+                className="flex-1 px-6 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#086972]"
+              />
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="bg-[#086972] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0b95a2] transition-colors disabled:opacity-50"
+              >
+                {status === 'loading' ? 'Cadastrando...' : status === 'success' ? 'Cadastrado!' : 'Inscrever-se'}
+              </button>
+            </div>
+            <label className="flex items-start gap-2 text-sm text-gray-600 cursor-pointer">
+              <input
+                type="checkbox"
+                required
+                className="mt-1 rounded border-gray-300 text-[#086972] focus:ring-[#086972]"
+              />
+              <span>
+                Li e concordo com a{' '}
+                <Link href="/privacy-policy" className="text-[#086972] hover:underline">
+                  Política de Privacidade
+                </Link>
+                .
+              </span>
+            </label>
           </form>
           {status === 'success' && (
             <p className="mt-4 text-green-600">Obrigado por se inscrever!</p>

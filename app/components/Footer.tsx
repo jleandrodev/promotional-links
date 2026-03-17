@@ -83,11 +83,53 @@ export default async function Footer() {
             </div>
           )}
 
-          {/* Contact */}
+          {/* Contact & Institutional */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-300">
-              <li>Email: info@nutrahub.com</li>
+              <li>
+                <a
+                  href="mailto:nutrahub.life@gmail.com"
+                  className="hover:text-white transition-colors"
+                >
+                  nutrahub.life@gmail.com
+                </a>
+              </li>
+            </ul>
+            <h4 className="text-lg font-semibold mb-4 mt-6">Institutional</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/privacy-policy"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/terms-of-service"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Terms of Service
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
