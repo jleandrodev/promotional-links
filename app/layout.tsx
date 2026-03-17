@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { CookieBanner } from "./components/CookieBanner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -114,6 +115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         )}
         {children}
+        <CookieBanner />
       </body>
     </html>
   );

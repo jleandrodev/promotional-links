@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getCategories } from "@/lib/supabase/queries";
+import { CookiePreferencesLink } from "./CookiePreferencesLink";
 
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
@@ -105,6 +106,9 @@ export default async function Footer() {
                 >
                   Privacy Policy
                 </Link>
+              </li>
+              <li>
+                <CookiePreferencesLink />
               </li>
               <li>
                 <Link
