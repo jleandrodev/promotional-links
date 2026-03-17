@@ -3,9 +3,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Contato | NutraHub',
+  title: 'Contact | NutraHub',
   description:
-    'Entre em contato com o NutraHub. Dúvidas, sugestões ou solicitações de exclusão de dados (LGPD) - estamos à disposição.',
+    'Get in touch with NutraHub. Questions, suggestions, or data privacy requests - we are here to help.',
   alternates: {
     canonical: '/contact',
   },
@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <InstitutionalPageLayout>
-      <h1>Contato</h1>
+      <h1>Contact</h1>
 
       <p>
-        Estamos à disposição para ouvir você. Entre em contato pelo e-mail abaixo para dúvidas, sugestões, parcerias ou qualquer outra questão.
+        We&apos;re here to hear from you. Reach out via the email below for questions, suggestions, partnerships, or any other inquiries.
       </p>
 
-      <h2>E-mail</h2>
+      <h2>Email</h2>
       <p>
         <a
           href="mailto:nutrahub.life@gmail.com"
@@ -30,23 +30,23 @@ export default function ContactPage() {
         </a>
       </p>
 
-      <h2>O que podemos ajudar?</h2>
+      <h2>How Can We Help?</h2>
       <ul>
-        <li>Dúvidas sobre nosso conteúdo ou produtos recomendados</li>
-        <li>Sugestões de temas para novos artigos</li>
-        <li>Propostas de parceria ou colaboração</li>
+        <li>Questions about our content or recommended products</li>
+        <li>Suggestions for new article topics</li>
+        <li>Partnership or collaboration proposals</li>
         <li>
-          <strong>Solicitações relacionadas à LGPD:</strong> acesso, correção, exclusão ou portabilidade dos seus dados pessoais
+          <strong>Privacy requests:</strong> access, correction, deletion, or portability of your personal data
         </li>
       </ul>
 
       <p>
-        Responderemos o mais breve possível. Para solicitações de direitos do titular (LGPD), nos comprometemos a responder em até 15 dias.
+        We will respond as soon as possible. For data privacy requests, we commit to responding within 15 days.
       </p>
 
       <p className="mt-8">
         <Link href="/" className="text-[#086972] hover:underline">
-          ← Voltar ao início
+          ← Back to home
         </Link>
       </p>
     </InstitutionalPageLayout>

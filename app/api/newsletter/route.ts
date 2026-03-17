@@ -7,57 +7,57 @@ export async function POST(request: Request) {
     const body = await request.json()
     const { email, recaptchaToken } = body
 
-    // Validação básica
+    // Basic validation
     if (!email || typeof email !== 'string') {
       return NextResponse.json(
-        { error: 'Email é obrigatório' },
+        { error: 'Email is required' },
         { status: 400 }
       )
     }
 
-    // Validar reCAPTCHA
+    // Validate reCAPTCHA
     if (!recaptchaToken || typeof recaptchaToken !== 'string') {
       return NextResponse.json(
-        { error: 'Validação de segurança necessária' },
+        { error: 'Security validation required' },
         { status: 400 }
       )
     }
 
-    // Verificar token do reCAPTCHA
+    // Verify reCAPTCHA token
     const recaptchaResult = await verifyRecaptcha(recaptchaToken)
 
     if (!recaptchaResult.success) {
       return NextResponse.json(
-        { error: 'Falha na validação de segurança. Tente novamente.' },
+        { error: 'Security validation failed. Please try again.' },
         { status: 400 }
       )
     }
 
-    // Validação de formato de email
+    // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Email inválido' },
+        { error: 'Invalid email address' },
         { status: 400 }
       )
     }
 
-    // Normalizar email (lowercase e trim)
+    // Normalize email (lowercase and trim)
     const normalizedEmail = email.toLowerCase().trim()
 
-    // Verificar se o email já existe
+    // Check if email already exists
     const existing = await prisma.newsletter.findUnique({
       where: { email: normalizedEmail },
     })
 
     if (existing) {
       return NextResponse.json(
-        { error: 'Este email já está cadastrado' },
+        { error: 'This email is already subscribed' },
         { status: 409 }
       )
     }
 
-    // Criar novo registro
+    // Create new record
     const newsletter = await prisma.newsletter.create({
       data: {
         email: normalizedEmail,
@@ -65,22 +65,22 @@ export async function POST(request: Request) {
     })
 
     return NextResponse.json(
-      { message: 'Email cadastrado com sucesso', id: newsletter.id },
+      { message: 'Successfully subscribed', id: newsletter.id },
       { status: 201 }
     )
   } catch (error: any) {
     console.error('Error subscribing to newsletter:', error)
 
-    // Tratar erro de constraint única (caso ocorra race condition)
+    // Handle unique constraint error (race condition)
     if (error.code === 'P2002') {
       return NextResponse.json(
-        { error: 'Este email já está cadastrado' },
+        { error: 'This email is already subscribed' },
         { status: 409 }
       )
     }
 
     return NextResponse.json(
-      { error: 'Erro ao processar solicitação' },
+      { error: 'Failed to process request' },
       { status: 500 }
     )
   }

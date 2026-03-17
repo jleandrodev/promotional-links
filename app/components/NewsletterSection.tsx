@@ -25,7 +25,7 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
       const recaptchaToken = await executeRecaptcha('newsletter_subscribe')
 
       if (!recaptchaToken) {
-        setErrorMessage('Erro ao validar segurança. Por favor, recarregue a página e tente novamente.')
+        setErrorMessage('Security validation failed. Please reload the page and try again.')
         setStatus('error')
         return
       }
@@ -41,7 +41,7 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
       const data = await response.json()
 
       if (!response.ok) {
-        setErrorMessage(data.error || 'Algo deu errado. Tente novamente.')
+        setErrorMessage(data.error || 'Something went wrong. Please try again.')
         setStatus('error')
         return
       }
@@ -50,7 +50,7 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
       setEmail('')
     } catch (error) {
       console.error('Error subscribing to newsletter:', error)
-      setErrorMessage('Erro ao conectar com o servidor. Tente novamente.')
+        setErrorMessage('Failed to connect. Please try again.')
       setStatus('error')
     }
   }
@@ -71,7 +71,7 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Digite seu email"
+                placeholder="Enter your email"
                 required
                 className="flex-1 px-6 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#086972]"
               />
@@ -80,7 +80,7 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
                 disabled={status === 'loading'}
                 className="bg-[#086972] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0b95a2] transition-colors disabled:opacity-50"
               >
-                {status === 'loading' ? 'Cadastrando...' : status === 'success' ? 'Cadastrado!' : 'Inscrever-se'}
+                {status === 'loading' ? 'Subscribing...' : status === 'success' ? 'Subscribed!' : 'Subscribe'}
               </button>
             </div>
             <label className="flex items-start gap-2 text-sm text-gray-600 cursor-pointer">
@@ -90,16 +90,16 @@ export default function NewsletterSection({ homeContent }: NewsletterSectionProp
                 className="mt-1 rounded border-gray-300 text-[#086972] focus:ring-[#086972]"
               />
               <span>
-                Li e concordo com a{' '}
+                I have read and agree to the{' '}
                 <Link href="/privacy-policy" className="text-[#086972] hover:underline">
-                  Política de Privacidade
+                  Privacy Policy
                 </Link>
                 .
               </span>
             </label>
           </form>
           {status === 'success' && (
-            <p className="mt-4 text-green-600">Obrigado por se inscrever!</p>
+            <p className="mt-4 text-green-600">Thank you for subscribing!</p>
           )}
           {status === 'error' && errorMessage && (
             <p className="mt-4 text-red-600">{errorMessage}</p>

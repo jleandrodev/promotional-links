@@ -3,9 +3,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidade | NutraHub',
+  title: 'Privacy Policy | NutraHub',
   description:
-    'Política de Privacidade do NutraHub. Saiba como coletamos, usamos e protegemos seus dados pessoais em conformidade com a LGPD.',
+    'NutraHub Privacy Policy. Learn how we collect, use, and protect your personal data.',
   alternates: {
     canonical: '/privacy-policy',
   },
@@ -14,106 +14,106 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <InstitutionalPageLayout>
-      <h1>Política de Privacidade</h1>
-      <p className="text-gray-600">Última atualização: Março de 2025</p>
+      <h1>Privacy Policy</h1>
+      <p className="text-gray-600">Last updated: March 2025</p>
 
-      <h2>1. Identificação do Controlador</h2>
+      <h2>1. Data Controller</h2>
       <p>
-        O NutraHub (&quot;nós&quot;, &quot;nosso&quot; ou &quot;controlador&quot;) é responsável pelo tratamento dos seus dados pessoais. Para exercer seus direitos ou esclarecer dúvidas, entre em contato pelo e-mail:{' '}
+        NutraHub (&quot;we&quot;, &quot;our&quot;, or &quot;controller&quot;) is responsible for the processing of your personal data. To exercise your rights or ask questions, contact us at:{' '}
         <a href="mailto:nutrahub.life@gmail.com" className="text-[#086972] hover:underline">
           nutrahub.life@gmail.com
         </a>
         .
       </p>
 
-      <h2>2. Dados Coletados</h2>
-      <p>Coletamos os seguintes dados:</p>
+      <h2>2. Data We Collect</h2>
+      <p>We collect the following data:</p>
       <ul>
         <li>
-          <strong>E-mail:</strong> quando você se inscreve em nossa newsletter
+          <strong>Email:</strong> when you subscribe to our newsletter
         </li>
         <li>
-          <strong>Dados técnicos:</strong> endereço IP, tipo de navegador, páginas visitadas e logs de acesso, coletados automaticamente
+          <strong>Technical data:</strong> IP address, browser type, pages visited, and access logs, collected automatically
         </li>
         <li>
-          <strong>Cookies e tecnologias similares:</strong> utilizamos reCAPTCHA (Google) para segurança e prevenção de abuso em formulários
+          <strong>Cookies and similar technologies:</strong> we use reCAPTCHA (Google) for security and abuse prevention on forms
         </li>
       </ul>
 
-      <h2>3. Finalidade do Tratamento</h2>
-      <p>Utilizamos seus dados para:</p>
+      <h2>3. Purpose of Processing</h2>
+      <p>We use your data to:</p>
       <ul>
-        <li>Enviar comunicações da newsletter (conteúdo, novidades e ofertas)</li>
-        <li>Melhorar a experiência e o funcionamento do site</li>
-        <li>Garantir a segurança e prevenir fraudes (reCAPTCHA)</li>
-        <li>Cumprir obrigações legais quando aplicável</li>
+        <li>Send newsletter communications (content, updates, and offers)</li>
+        <li>Improve the site experience and functionality</li>
+        <li>Ensure security and prevent fraud (reCAPTCHA)</li>
+        <li>Comply with legal obligations when applicable</li>
       </ul>
 
-      <h2>4. Base Legal</h2>
+      <h2>4. Legal Basis</h2>
       <p>
-        O tratamento é realizado com base em: <strong>consentimento</strong> (newsletter) e <strong>legítimo interesse</strong> (logs técnicos, segurança e melhoria do serviço), nos termos da Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018).
+        Processing is based on: <strong>consent</strong> (newsletter) and <strong>legitimate interest</strong> (technical logs, security, and service improvement). We comply with applicable data protection laws, including GDPR (for EU/UK visitors), CCPA (for California residents), and Australian Privacy Principles (for Australian visitors).
       </p>
 
-      <h2>5. Compartilhamento de Dados</h2>
-      <p>Seus dados podem ser compartilhados com:</p>
+      <h2>5. Data Sharing</h2>
+      <p>Your data may be shared with:</p>
       <ul>
         <li>
-          <strong>Provedores de infraestrutura:</strong> Supabase, Vercel e serviços de hospedagem, para operação do site
+          <strong>Infrastructure providers:</strong> Supabase, Vercel, and hosting services for site operation
         </li>
         <li>
-          <strong>Google (reCAPTCHA):</strong> para validação de formulários e prevenção de abuso
+          <strong>Google (reCAPTCHA):</strong> for form validation and abuse prevention
         </li>
         <li>
-          <strong>Programas de afiliados:</strong> quando você clica em links de produtos em nosso site, o comerciante pode receber informações sobre sua visita (conforme política de privacidade de cada parceiro)
+          <strong>Affiliate programs:</strong> when you click product links on our site, the merchant may receive information about your visit (per each partner&apos;s privacy policy)
         </li>
       </ul>
-      <p>Não vendemos seus dados pessoais a terceiros.</p>
+      <p>We do not sell your personal data to third parties.</p>
 
-      <h2>6. Retenção dos Dados</h2>
+      <h2>6. Data Retention</h2>
       <p>
-        Os dados da newsletter são mantidos enquanto você permanecer inscrito ou solicitar exclusão. Logs técnicos são armazenados pelo período necessário para segurança e operação, conforme boas práticas. Você pode solicitar a exclusão a qualquer momento.
+        Newsletter data is retained while you remain subscribed or until you request deletion. Technical logs are stored for the period necessary for security and operation, in line with best practices. You may request deletion at any time.
       </p>
 
-      <h2>7. Direitos do Titular (Art. 18 da LGPD)</h2>
-      <p>Você tem direito a:</p>
+      <h2>7. Your Rights</h2>
+      <p>You have the right to:</p>
       <ul>
-        <li>Confirmar a existência de tratamento de dados</li>
-        <li>Acessar seus dados</li>
-        <li>Corrigir dados incompletos ou desatualizados</li>
-        <li>Solicitar a exclusão dos dados</li>
-        <li>Solicitar a portabilidade dos dados</li>
-        <li>Revogar o consentimento a qualquer momento</li>
+        <li>Confirm whether we process your data</li>
+        <li>Access your data</li>
+        <li>Correct incomplete or outdated data</li>
+        <li>Request deletion of your data</li>
+        <li>Request data portability</li>
+        <li>Withdraw consent at any time</li>
       </ul>
       <p>
-        Para exercer esses direitos, envie um e-mail para{' '}
+        To exercise these rights, email us at{' '}
         <a href="mailto:nutrahub.life@gmail.com" className="text-[#086972] hover:underline">
           nutrahub.life@gmail.com
         </a>
-        . Responderemos em até 15 dias.
+        . We will respond within 15 days.
       </p>
 
       <h2>8. Cookies</h2>
       <p>
-        Utilizamos o serviço reCAPTCHA da Google para proteger formulários contra spam e abuso. O reCAPTCHA pode coletar informações do seu dispositivo e navegação conforme a{' '}
+        We use Google&apos;s reCAPTCHA service to protect forms from spam and abuse. reCAPTCHA may collect information from your device and browsing activity per the{' '}
         <a
           href="https://policies.google.com/privacy"
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#086972] hover:underline"
         >
-          Política de Privacidade do Google
+          Google Privacy Policy
         </a>
         .
       </p>
 
-      <h2>9. Alterações nesta Política</h2>
+      <h2>9. Changes to This Policy</h2>
       <p>
-        Podemos atualizar esta Política de Privacidade periodicamente. Alterações relevantes serão comunicadas por e-mail (quando aplicável) ou por aviso em destaque no site. A data da última atualização será indicada no topo desta página.
+        We may update this Privacy Policy from time to time. Significant changes will be communicated by email (where applicable) or by a notice on the site. The last update date will be shown at the top of this page.
       </p>
 
-      <h2>10. Contato</h2>
+      <h2>10. Contact</h2>
       <p>
-        Para dúvidas, solicitações ou reclamações sobre o tratamento de seus dados, entre em contato:{' '}
+        For questions, requests, or complaints about how we handle your data, contact us at:{' '}
         <a href="mailto:nutrahub.life@gmail.com" className="text-[#086972] hover:underline">
           nutrahub.life@gmail.com
         </a>
@@ -122,7 +122,7 @@ export default function PrivacyPolicyPage() {
 
       <p className="mt-8">
         <Link href="/" className="text-[#086972] hover:underline">
-          ← Voltar ao início
+          ← Back to home
         </Link>
       </p>
     </InstitutionalPageLayout>

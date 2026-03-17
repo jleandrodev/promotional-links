@@ -3,9 +3,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Termos de Uso | NutraHub',
+  title: 'Terms of Service | NutraHub',
   description:
-    'Termos de Uso do NutraHub. Conheça as regras e condições para utilização do nosso site de saúde natural e bem-estar.',
+    'NutraHub Terms of Service. Learn the rules and conditions for using our natural health and wellness site.',
   alternates: {
     canonical: '/terms-of-service',
   },
@@ -14,67 +14,67 @@ export const metadata: Metadata = {
 export default function TermsOfServicePage() {
   return (
     <InstitutionalPageLayout>
-      <h1>Termos de Uso</h1>
-      <p className="text-gray-600">Última atualização: Março de 2025</p>
+      <h1>Terms of Service</h1>
+      <p className="text-gray-600">Last updated: March 2025</p>
 
-      <h2>1. Aceitação dos Termos</h2>
+      <h2>1. Acceptance of Terms</h2>
       <p>
-        Ao acessar e utilizar o site NutraHub, você declara ter lido, compreendido e aceitado os presentes Termos de Uso. Caso não concorde com qualquer disposição, solicitamos que não utilize o site.
-      </p>
-
-      <h2>2. Descrição do Serviço</h2>
-      <p>
-        O NutraHub é um site informativo dedicado a saúde natural, bem-estar e recomendações de produtos e suplementos. Nosso conteúdo inclui artigos, guias e informações educacionais. O site não realiza vendas diretamente; as compras são realizadas em sites de terceiros.
+        By accessing and using the NutraHub website, you acknowledge that you have read, understood, and agree to these Terms of Service. If you do not agree with any provision, please do not use the site.
       </p>
 
-      <h2>3. Links de Afiliados</h2>
+      <h2>2. Description of Service</h2>
       <p>
-        O NutraHub participa de programas de afiliados. Isso significa que podemos receber uma comissão quando você realiza uma compra através de links presentes em nossos artigos e páginas. Essa comissão não altera o preço final para você e nos ajuda a manter o site e produzir conteúdo de qualidade.
-      </p>
-      <p>
-        Somos transparentes sobre essa prática: sempre que recomendamos um produto, nossa intenção é oferecer informações úteis. A decisão de compra é exclusivamente sua.
+        NutraHub is an informational website dedicated to natural health, wellness, and product and supplement recommendations. Our content includes articles, guides, and educational information. The site does not sell products directly; purchases are made on third-party websites.
       </p>
 
-      <h2>4. Isenção de Responsabilidade Médica</h2>
+      <h2>3. Affiliate Links</h2>
       <p>
-        <strong>O conteúdo do NutraHub é exclusivamente informativo e educacional.</strong> Não substitui orientação médica, nutricional ou de qualquer outro profissional de saúde. Consulte sempre um profissional qualificado antes de iniciar tratamentos, dietas ou uso de suplementos.
+        NutraHub participates in affiliate programs. This means we may receive a commission when you make a purchase through links on our articles and pages. This commission does not change the final price for you and helps us maintain the site and produce quality content.
       </p>
       <p>
-        As informações publicadas são baseadas em pesquisas e evidências disponíveis na data da publicação, mas podem não refletir descobertas mais recentes. O NutraHub não se responsabiliza por decisões tomadas com base no conteúdo do site.
-      </p>
-
-      <h2>5. Propriedade Intelectual</h2>
-      <p>
-        Todo o conteúdo do site (textos, imagens, logos, layout e demais elementos) é de propriedade do NutraHub ou de seus licenciadores e está protegido por leis de direitos autorais. O uso é permitido apenas para leitura e consulta pessoal. É proibida a reprodução, distribuição, modificação ou uso comercial sem autorização prévia por escrito.
+        We are transparent about this practice: whenever we recommend a product, our intention is to provide useful information. The decision to purchase is entirely yours.
       </p>
 
-      <h2>6. Conduta do Usuário</h2>
-      <p>Ao utilizar o site, você se compromete a:</p>
+      <h2>4. Medical Disclaimer</h2>
+      <p>
+        <strong>NutraHub content is for informational and educational purposes only.</strong> It does not replace medical, nutritional, or any other professional health advice. Always consult a qualified professional before starting treatments, diets, or using supplements.
+      </p>
+      <p>
+        The information published is based on research and evidence available at the time of publication, but may not reflect more recent findings. NutraHub is not responsible for decisions made based on the site&apos;s content.
+      </p>
+
+      <h2>5. Intellectual Property</h2>
+      <p>
+        All site content (text, images, logos, layout, and other elements) is owned by NutraHub or its licensors and is protected by copyright laws. Use is permitted only for personal reading and reference. Reproduction, distribution, modification, or commercial use without prior written authorization is prohibited.
+      </p>
+
+      <h2>6. User Conduct</h2>
+      <p>When using the site, you agree to:</p>
       <ul>
-        <li>Não utilizar o site para fins ilegais ou que violem direitos de terceiros</li>
-        <li>Não realizar scraping, extração automatizada de dados ou sobrecarga dos servidores</li>
-        <li>Não tentar acessar áreas restritas ou comprometer a segurança do site</li>
-        <li>Não utilizar o conteúdo de forma que cause prejuízo ou dano à reputação do NutraHub</li>
+        <li>Not use the site for illegal purposes or in ways that violate third-party rights</li>
+        <li>Not perform scraping, automated data extraction, or server overload</li>
+        <li>Not attempt to access restricted areas or compromise the site&apos;s security</li>
+        <li>Not use the content in ways that harm or damage NutraHub&apos;s reputation</li>
       </ul>
 
-      <h2>7. Limitação de Responsabilidade</h2>
+      <h2>7. Limitation of Liability</h2>
       <p>
-        O NutraHub não se responsabiliza por danos indiretos, incidentais ou consequenciais decorrentes do uso ou da impossibilidade de uso do site. O site é fornecido &quot;como está&quot;, sem garantias de disponibilidade ininterrupta ou ausência de erros. Não nos responsabilizamos por conteúdos ou práticas de sites de terceiros acessados por meio de links em nosso site.
+        NutraHub is not liable for indirect, incidental, or consequential damages arising from the use or inability to use the site. The site is provided &quot;as is&quot;, without warranties of uninterrupted availability or error-free operation. We are not responsible for the content or practices of third-party sites accessed through links on our site.
       </p>
 
-      <h2>8. Alterações nos Termos</h2>
+      <h2>8. Changes to Terms</h2>
       <p>
-        Reservamo-nos o direito de modificar estes Termos de Uso a qualquer momento. Alterações significativas serão comunicadas por aviso em destaque no site. O uso continuado do site após as alterações constitui aceitação dos novos termos.
+        We reserve the right to modify these Terms of Service at any time. Significant changes will be communicated by a notice on the site. Continued use of the site after changes constitutes acceptance of the new terms.
       </p>
 
-      <h2>9. Lei Aplicável e Foro</h2>
+      <h2>9. Governing Law and Jurisdiction</h2>
       <p>
-        Estes Termos são regidos pelas leis da República Federativa do Brasil. Para dirimir quaisquer controvérsias, fica eleito o foro da comarca do domicílio do usuário, com renúncia a qualquer outro, por mais privilegiado que seja.
+        These Terms are governed by the laws of the United States. For users in Australia, Australian law may also apply. Any disputes shall be resolved in the courts of the user&apos;s jurisdiction, or as otherwise required by applicable law.
       </p>
 
-      <h2>10. Contato</h2>
+      <h2>10. Contact</h2>
       <p>
-        Para dúvidas sobre estes Termos de Uso, entre em contato:{' '}
+        For questions about these Terms of Service, contact us at:{' '}
         <a href="mailto:nutrahub.life@gmail.com" className="text-[#086972] hover:underline">
           nutrahub.life@gmail.com
         </a>
@@ -83,7 +83,7 @@ export default function TermsOfServicePage() {
 
       <p className="mt-8">
         <Link href="/" className="text-[#086972] hover:underline">
-          ← Voltar ao início
+          ← Back to home
         </Link>
       </p>
     </InstitutionalPageLayout>
