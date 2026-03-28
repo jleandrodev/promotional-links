@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Pagination from '../components/Pagination'
+import ProfitableCpmNetworkBanner from '../components/ProfitableCpmNetworkBanner'
 import { getBlogPosts } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
 
@@ -121,8 +122,11 @@ export default async function BlogPage({
                   baseUrl="/blog"
                 />
               )}
+
+              <ProfitableCpmNetworkBanner />
             </>
           )}
+          {paginatedPosts.length === 0 && <ProfitableCpmNetworkBanner />}
         </div>
       </main>
       <Footer />

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { getProducts } from '@/lib/supabase/queries'
+import ProfitableCpmNetworkBanner from '../components/ProfitableCpmNetworkBanner'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 
@@ -116,6 +117,7 @@ export default async function ProductsPage() {
               </div>
             ))}
           </div>
+          <ProfitableCpmNetworkBanner />
         </div>
 
         {/* SEO Content Section */}

@@ -4,6 +4,7 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import ProductSidebarCard from '../../components/ProductSidebarCard'
 import AdsterraSidebarAds from '../../components/AdsterraSidebarAds'
+import ProfitableCpmNetworkBanner from '../../components/ProfitableCpmNetworkBanner'
 import { getBlogPostBySlug, getBlogPosts } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
 import Script from 'next/script'
@@ -172,6 +173,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 )}
               </div>
             </div>
+          </div>
+
+          <div className="container mx-auto px-4 lg:px-8 pb-12">
+            <ProfitableCpmNetworkBanner />
           </div>
 
           {/* SEO Content Section */}

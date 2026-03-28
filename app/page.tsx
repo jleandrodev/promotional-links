@@ -4,6 +4,7 @@ import CategoriesSection from './components/CategoriesSection'
 import LatestPostsSection from './components/LatestPostsSection'
 import ProductBanner from './components/ProductBanner'
 import ProductsSection from './components/ProductsSection'
+import ProfitableCpmNetworkBanner from './components/ProfitableCpmNetworkBanner'
 import NewsletterSection from './components/NewsletterSection'
 import Footer from './components/Footer'
 import { getBlogPosts, getCategories, getProducts, getHomeContent } from '@/lib/supabase/queries'
@@ -80,8 +81,14 @@ export default async function Home({
           totalPages={totalPages}
           showPagination={totalPosts > postsPerPage}
         />
+        <div className="container mx-auto px-4">
+          <ProfitableCpmNetworkBanner omitContainerDomId />
+        </div>
         <ProductBanner homeContent={homeContent} />
         <ProductsSection products={serializedProducts} />
+        <div className="container mx-auto px-4">
+          <ProfitableCpmNetworkBanner />
+        </div>
         <NewsletterSection homeContent={homeContent} />
       </main>
       <Footer />

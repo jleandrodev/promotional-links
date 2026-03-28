@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Pagination from '../../components/Pagination'
+import ProfitableCpmNetworkBanner from '../../components/ProfitableCpmNetworkBanner'
 import { getCategoryBySlug, getCategories } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
 import Script from 'next/script'
@@ -166,8 +167,10 @@ export default async function CategoryPage({
                   baseUrl={`/categories/${slug}`}
                 />
               )}
-              
-              {/* SEO Description abaixo da listagem */}
+
+              <ProfitableCpmNetworkBanner />
+
+              {/* SEO Description abaixo do banner */}
               {category.description && (
                 <div className="mt-12 pt-8 border-t border-gray-200">
                   <div
@@ -178,6 +181,7 @@ export default async function CategoryPage({
               )}
             </>
           )}
+          {paginatedPosts.length === 0 && <ProfitableCpmNetworkBanner />}
         </div>
       </main>
       <Footer />
