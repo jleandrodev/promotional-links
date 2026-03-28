@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import ProductSidebarCard from '../../components/ProductSidebarCard'
+import AdsterraSidebarAds from '../../components/AdsterraSidebarAds'
 import { getBlogPostBySlug, getBlogPosts } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
 import Script from 'next/script'
@@ -165,44 +166,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <aside className="w-full lg:w-64 flex-shrink-0 order-2 lg:order-1">
                     <div className="lg:sticky lg:top-24 space-y-6">
                       <ProductSidebarCard product={post.product} />
-                      <div className="w-full overflow-hidden flex justify-center [&_iframe]:max-w-full">
-                        <Script
-                          id={`highperformanceformat-opts-${post.slug}`}
-                          strategy="afterInteractive"
-                          dangerouslySetInnerHTML={{
-                            __html: `var atOptions = {
-  'key' : '4587424aece1db9cec44bd52a13a7528',
-  'format' : 'iframe',
-  'height' : 250,
-  'width' : 300,
-  'params' : {}
-};`,
-                          }}
-                        />
-                        <Script
-                          src="https://www.highperformanceformat.com/4587424aece1db9cec44bd52a13a7528/invoke.js"
-                          strategy="afterInteractive"
-                        />
-                      </div>
-                      <div className="w-full overflow-hidden flex justify-center [&_iframe]:max-w-full">
-                        <Script
-                          id={`highperformanceformat-opts-220c48-${post.slug}`}
-                          strategy="afterInteractive"
-                          dangerouslySetInnerHTML={{
-                            __html: `var atOptions = {
-  'key' : '220c48a70cd4b708e7fc3cd15050f95b',
-  'format' : 'iframe',
-  'height' : 300,
-  'width' : 160,
-  'params' : {}
-};`,
-                          }}
-                        />
-                        <Script
-                          src="https://www.highperformanceformat.com/220c48a70cd4b708e7fc3cd15050f95b/invoke.js"
-                          strategy="afterInteractive"
-                        />
-                      </div>
+                      <AdsterraSidebarAds />
                     </div>
                   </aside>
                 )}
