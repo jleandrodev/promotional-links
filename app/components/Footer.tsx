@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SiInstagram, SiYoutube } from "react-icons/si";
 import { getCategories } from "@/lib/supabase/queries";
 import { CookiePreferencesLink } from "./CookiePreferencesLink";
 
@@ -94,6 +95,31 @@ export default async function Footer() {
                   className="hover:text-white transition-colors"
                 >
                   nutrahub.life@gmail.com
+                </a>
+              </li>
+            </ul>
+            <h4 className="text-lg font-semibold mb-4 mt-6">Follow us</h4>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="https://www.instagram.com/nutrahub.life/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  <SiInstagram className="h-5 w-5 shrink-0" aria-hidden />
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/@Nutrahub-life"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  <SiYoutube className="h-5 w-5 shrink-0" aria-hidden />
+                  YouTube
                 </a>
               </li>
             </ul>

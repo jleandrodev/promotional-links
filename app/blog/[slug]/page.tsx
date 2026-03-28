@@ -163,8 +163,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 {/* Sidebar com card do produto - mobile abaixo do artigo, desktop ao lado */}
                 {post.product && (
                   <aside className="w-full lg:w-64 flex-shrink-0 order-2 lg:order-1">
-                    <div className="lg:sticky lg:top-24">
+                    <div className="lg:sticky lg:top-24 space-y-6">
                       <ProductSidebarCard product={post.product} />
+                      <Script
+                        id={`hilltopads-publisher-${post.slug}`}
+                        strategy="afterInteractive"
+                        dangerouslySetInnerHTML={{
+                          __html: `(function(rffz){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = rffz || {};
+s.src = "//webbedtrash.com/bdX.VYs/dPGPl/0TYkW-cc/aeYmF9Lu/ZNUPloknPFTuYP5/MQDnUs2dNfj/kYtLNtjfkAwUN/TuYv3KM-wV";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})`,
+                        }}
+                      />
                     </div>
                   </aside>
                 )}
