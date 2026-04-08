@@ -1,0 +1,322 @@
+
+    #baby-sleep-guide-root, #baby-sleep-guide-root *, #baby-sleep-guide-root *::before, #baby-sleep-guide-root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    #baby-sleep-guide-root {
+      --navy:  #0d1b2a;
+      --blue:  #1a4a7a;
+      --mid:   #2b7de9;
+      --sky:   #e8f4ff;
+      --gold:  #f5a623;
+      --gold2: #e09312;
+      --white: #ffffff;
+      --text:  #2c3e50;
+      --muted: #6b7c93;
+      --light: #f7fbff;
+    }
+
+    #baby-sleep-guide-root {
+      font-family: var(--font-inter), system-ui, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+      /* Altura do header fixo: 14+14+conteúdo (~40px); safe area extra só acima de 14px */
+      padding-top: calc(68px + max(0px, env(safe-area-inset-top, 0px) - 14px));
+    }
+    #baby-sleep-guide-root h1, #baby-sleep-guide-root h2, #baby-sleep-guide-root h3, #baby-sleep-guide-root h4 { font-family: var(--font-bsg-lora), serif; line-height: 1.2; }
+
+    /* ── HEADER ──────────────────────────────────────── */
+    #baby-sleep-guide-root .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1100;
+      background: var(--navy);
+      padding: 14px 24px;
+      padding-top: max(14px, env(safe-area-inset-top, 0px));
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 20px rgba(0,0,0,.4);
+      box-sizing: border-box;
+    }
+    #baby-sleep-guide-root .logo { font-family: var(--font-bsg-lora), serif; color:var(--white); font-size:1.1rem; font-weight:600; letter-spacing:.5px; }
+    #baby-sleep-guide-root .logo span { color: var(--gold); }
+    #baby-sleep-guide-root .btn-header {
+      background: var(--gold); color: var(--navy);
+      font-weight:700; font-size:.85rem;
+      padding:10px 22px; border-radius:50px;
+      text-decoration:none; white-space:nowrap;
+      transition: background .2s, transform .2s;
+    }
+    #baby-sleep-guide-root .btn-header:hover { background:var(--gold2); transform:translateY(-1px); }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    #baby-sleep-guide-root .hero {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 60%, #0f2a44 100%);
+      padding: 80px 24px 0; overflow: hidden; position: relative;
+    }
+    #baby-sleep-guide-root .hero::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(43,125,233,.15) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    #baby-sleep-guide-root .hero-inner {
+      max-width:1100px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:48px; align-items:end;
+    }
+    #baby-sleep-guide-root .hero-text { padding-bottom: 64px; }
+    #baby-sleep-guide-root .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(245,166,35,.15); border:1px solid rgba(245,166,35,.4);
+      color:var(--gold); font-size:.8rem; font-weight:600;
+      padding:6px 14px; border-radius:50px; margin-bottom:24px;
+      letter-spacing:.5px; text-transform:uppercase;
+    }
+    #baby-sleep-guide-root .hero h1 { font-size:clamp(2rem,4vw,3rem); color:var(--white); margin-bottom:20px; line-height:1.15; }
+    #baby-sleep-guide-root .hero h1 span { color: var(--gold); }
+    #baby-sleep-guide-root .hero-sub { font-size:1.1rem; color:rgba(255,255,255,.75); line-height:1.7; margin-bottom:36px; max-width:480px; }
+    #baby-sleep-guide-root .btn-hero {
+      display:inline-flex; align-items:center; gap:10px;
+      background:var(--gold); color:var(--navy);
+      font-weight:800; font-size:1.1rem;
+      padding:18px 36px; border-radius:50px;
+      text-decoration:none;
+      box-shadow:0 8px 32px rgba(245,166,35,.45);
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    #baby-sleep-guide-root .btn-hero:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 12px 40px rgba(245,166,35,.55); }
+    #baby-sleep-guide-root .hero-note { margin-top:14px; font-size:.82rem; color:rgba(255,255,255,.45); display:flex; align-items:center; gap:6px; }
+    #baby-sleep-guide-root .hero-img-wrap { display:flex; align-items:flex-end; justify-content:center; }
+    #baby-sleep-guide-root .hero-img-wrap img { width:100%; max-width:480px; border-radius:20px 20px 0 0; object-fit:cover; display:block; box-shadow:0 -20px 60px rgba(43,125,233,.2); }
+    #baby-sleep-guide-root .hero-stats {
+      display:flex; background:var(--white);
+      border-radius:16px; overflow:hidden;
+      box-shadow:0 8px 40px rgba(0,0,0,.15);
+      margin: 0 24px;
+    }
+    #baby-sleep-guide-root .hero-stat { flex:1; text-align:center; padding:20px 12px; border-right:1px solid #e8f0fb; }
+    #baby-sleep-guide-root .hero-stat:last-child { border-right:none; }
+    #baby-sleep-guide-root .hero-stat .num { font-family: var(--font-bsg-lora), serif; font-size:1.8rem; font-weight:700; color:var(--blue); }
+    #baby-sleep-guide-root .hero-stat .lbl { font-size:.75rem; color:var(--muted); margin-top:2px; line-height:1.3; }
+
+    /* ── SECTION BASE ─────────────────────────────────── */
+    #baby-sleep-guide-root section { padding:80px 24px; }
+    #baby-sleep-guide-root .container { max-width:1080px; margin:0 auto; }
+    #baby-sleep-guide-root .section-tag {
+      display:inline-block; background:var(--sky); color:var(--mid);
+      font-size:.75rem; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; padding:5px 14px; border-radius:50px; margin-bottom:16px;
+    }
+    #baby-sleep-guide-root .section-title { font-size:clamp(1.7rem,3.5vw,2.4rem); color:var(--navy); margin-bottom:16px; max-width:700px; }
+    #baby-sleep-guide-root .section-sub { font-size:1.05rem; color:var(--muted); line-height:1.75; max-width:640px; margin-bottom:48px; }
+
+    /* ── PAIN ─────────────────────────────────────────── */
+    #baby-sleep-guide-root .pain { background: var(--light); }
+    #baby-sleep-guide-root .pain-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+    #baby-sleep-guide-root .pain-img img { width:100%; border-radius:20px; object-fit:cover; box-shadow:0 16px 48px rgba(13,27,42,.12); }
+    #baby-sleep-guide-root .pain-list { list-style:none; display:flex; flex-direction:column; gap:18px; }
+    #baby-sleep-guide-root .pain-list li { display:flex; gap:14px; align-items:flex-start; font-size:1.02rem; color:var(--text); line-height:1.6; }
+    #baby-sleep-guide-root .pain-list li .icon { flex-shrink:0; width:36px; height:36px; background:#fff1f1; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+    #baby-sleep-guide-root .pain-highlight {
+      background:linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius:16px; padding:24px 28px; margin-top:32px;
+      color:var(--white); font-size:1rem; line-height:1.65; font-style:italic;
+    }
+    #baby-sleep-guide-root .pain-highlight strong { color:var(--gold); font-style:normal; }
+
+    /* ── WHY ──────────────────────────────────────────── */
+    #baby-sleep-guide-root .why { background: var(--white); }
+    #baby-sleep-guide-root .why-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    #baby-sleep-guide-root .why-card {
+      background:var(--sky); border-radius:16px; padding:28px;
+      border-left:4px solid var(--mid);
+      transition: transform .2s, box-shadow .2s;
+    }
+    #baby-sleep-guide-root .why-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(43,125,233,.12); }
+    #baby-sleep-guide-root .why-card .why-icon { width:48px; height:48px; background:var(--mid); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:16px; }
+    #baby-sleep-guide-root .why-card h4 { font-size:1.05rem; color:var(--navy); margin-bottom:10px; }
+    #baby-sleep-guide-root .why-card p { font-size:.92rem; color:var(--muted); line-height:1.65; }
+    #baby-sleep-guide-root .why-note {
+      background:linear-gradient(135deg, #1a4a7a, #2b7de9);
+      border-radius:16px; padding:24px 32px; margin-top:32px;
+      display:flex; align-items:center; gap:16px; color:var(--white);
+    }
+    #baby-sleep-guide-root .why-note .check { font-size:1.8rem; flex-shrink:0; }
+    #baby-sleep-guide-root .why-note p { font-size:1rem; line-height:1.6; }
+    #baby-sleep-guide-root .why-note strong { color:var(--gold); }
+
+    /* ── PRODUCT ──────────────────────────────────────── */
+    #baby-sleep-guide-root .product { background: var(--navy); overflow:hidden; }
+    #baby-sleep-guide-root .product .section-tag { background:rgba(245,166,35,.15); color:var(--gold); }
+    #baby-sleep-guide-root .product .section-title { color:var(--white); max-width:100%; }
+    #baby-sleep-guide-root .product .section-sub { color:rgba(255,255,255,.65); }
+    #baby-sleep-guide-root .product-layout { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    #baby-sleep-guide-root .product-mockup { position:relative; display:flex; justify-content:center; }
+    #baby-sleep-guide-root .product-mockup img { width:100%; max-width:380px; border-radius:20px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+    #baby-sleep-guide-root .product-badge {
+      position:absolute; top:-16px; right:-10px;
+      background:var(--gold); color:var(--navy);
+      font-weight:800; font-size:.9rem; padding:10px 18px;
+      border-radius:50px; box-shadow:0 8px 24px rgba(245,166,35,.4);
+      transform:rotate(8deg);
+    }
+    #baby-sleep-guide-root .product-features { display:flex; flex-direction:column; gap:20px; }
+    #baby-sleep-guide-root .feat { display:flex; gap:16px; align-items:flex-start; }
+    #baby-sleep-guide-root .feat-icon { flex-shrink:0; width:44px; height:44px; background:rgba(43,125,233,.2); border:1px solid rgba(43,125,233,.4); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
+    #baby-sleep-guide-root .feat-text h4 { color:var(--white); font-size:1rem; margin-bottom:4px; }
+    #baby-sleep-guide-root .feat-text p { color:rgba(255,255,255,.6); font-size:.9rem; line-height:1.55; }
+
+    /* ── INSIDE ───────────────────────────────────────── */
+    #baby-sleep-guide-root .inside { background: var(--light); }
+    #baby-sleep-guide-root .inside-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    #baby-sleep-guide-root .inside-card {
+      background:var(--white); border-radius:16px; padding:28px 24px;
+      box-shadow:0 4px 20px rgba(0,0,0,.06);
+      transition: transform .2s, box-shadow .2s;
+      position:relative; overflow:hidden;
+    }
+    #baby-sleep-guide-root .inside-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--mid), var(--blue)); }
+    #baby-sleep-guide-root .inside-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,.1); }
+    #baby-sleep-guide-root .inside-num { font-family: var(--font-bsg-lora), serif; font-size:3rem; font-weight:700; color:var(--sky); line-height:1; margin-bottom:8px; }
+    #baby-sleep-guide-root .inside-card h4 { font-size:1rem; color:var(--navy); margin-bottom:10px; }
+    #baby-sleep-guide-root .inside-card p { font-size:.88rem; color:var(--muted); line-height:1.6; }
+
+    /* ── PLAN ─────────────────────────────────────────── */
+    #baby-sleep-guide-root .plan { background: var(--white); }
+    #baby-sleep-guide-root .plan-layout { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    #baby-sleep-guide-root .timeline { display:flex; flex-direction:column; }
+    #baby-sleep-guide-root .tl-item { display:flex; gap:20px; }
+    #baby-sleep-guide-root .tl-left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+    #baby-sleep-guide-root .tl-dot { width:36px; height:36px; background:var(--mid); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.85rem; font-weight:700; color:var(--white); box-shadow:0 0 0 5px var(--sky); flex-shrink:0; }
+    #baby-sleep-guide-root .tl-connector { flex:1; width:2px; background:linear-gradient(180deg, var(--mid), #c8dff8); margin:6px 0; min-height:24px; }
+    #baby-sleep-guide-root .tl-item:last-child .tl-connector { display:none; }
+    #baby-sleep-guide-root .tl-content { padding-bottom:32px; padding-top:6px; }
+    #baby-sleep-guide-root .tl-item:last-child .tl-content { padding-bottom:0; }
+    #baby-sleep-guide-root .tl-item h4 { font-size:1rem; color:var(--navy); margin-bottom:6px; }
+    #baby-sleep-guide-root .tl-item p { font-size:.9rem; color:var(--muted); line-height:1.6; }
+    #baby-sleep-guide-root .plan-img img { width:100%; border-radius:20px; object-fit:cover; box-shadow:0 16px 48px rgba(13,27,42,.1); }
+
+    /* ── NUMBERS ──────────────────────────────────────── */
+    #baby-sleep-guide-root .numbers-heading {
+      font-family: var(--font-bsg-lora), serif;
+      color: white;
+      text-align: center;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 48px;
+    }
+    #baby-sleep-guide-root .numbers { background:linear-gradient(135deg, #1a3a5c, #0d2540); padding:80px 24px; }
+    #baby-sleep-guide-root .numbers-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:800px; margin:0 auto; text-align:center; }
+    #baby-sleep-guide-root .num-item { padding:40px 24px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:16px; }
+    #baby-sleep-guide-root .num-item .big { font-family: var(--font-bsg-lora), serif; font-size:3.5rem; font-weight:700; color:var(--gold); display:block; }
+    #baby-sleep-guide-root .num-item .desc { font-size:.9rem; color:rgba(255,255,255,.7); margin-top:6px; line-height:1.4; }
+
+    /* ── TESTIMONIALS ─────────────────────────────────── */
+    #baby-sleep-guide-root .testimonials { background: var(--sky); }
+    #baby-sleep-guide-root .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    #baby-sleep-guide-root .testi-card { background:var(--white); border-radius:16px; padding:28px 24px; box-shadow:0 4px 20px rgba(0,0,0,.06); }
+    #baby-sleep-guide-root .stars { color:#f5a623; font-size:1.1rem; margin-bottom:14px; letter-spacing:2px; }
+    #baby-sleep-guide-root .testi-card p { font-size:.95rem; color:var(--text); line-height:1.7; font-style:italic; margin-bottom:20px; }
+    #baby-sleep-guide-root .testi-author { display:flex; align-items:center; gap:12px; }
+    #baby-sleep-guide-root .testi-avatar { width:44px; height:44px; border-radius:50%; background:var(--sky); display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:700; color:var(--mid); font-family: var(--font-bsg-lora), serif; }
+    #baby-sleep-guide-root .testi-name { font-weight:600; font-size:.92rem; color:var(--navy); }
+    #baby-sleep-guide-root .testi-info { font-size:.8rem; color:var(--muted); }
+
+    /* ── OFFER ────────────────────────────────────────── */
+    #baby-sleep-guide-root .offer { background:var(--white); text-align:center; }
+    #baby-sleep-guide-root .offer-box {
+      background:linear-gradient(135deg, #0d1b2a, #1a3a5c);
+      border-radius:32px; padding:64px 48px;
+      max-width:680px; margin:0 auto;
+      position:relative; overflow:hidden;
+    }
+    #baby-sleep-guide-root .offer-box::before { content:''; position:absolute; top:-100px; right:-100px; width:300px; height:300px; background:radial-gradient(circle, rgba(245,166,35,.12), transparent 70%); pointer-events:none; }
+    #baby-sleep-guide-root .offer-box .section-tag { background:rgba(245,166,35,.15); color:var(--gold); }
+    #baby-sleep-guide-root .offer-box .section-title { color:var(--white); margin:0 auto 16px; text-align:center; }
+    #baby-sleep-guide-root .offer-sub { color:rgba(255,255,255,.65); font-size:1rem; line-height:1.7; margin-bottom:36px; }
+    #baby-sleep-guide-root .price-block { margin-bottom:36px; }
+    #baby-sleep-guide-root .price-old { font-size:1rem; color:rgba(255,255,255,.4); text-decoration:line-through; margin-bottom:4px; }
+    #baby-sleep-guide-root .price-new { font-family: var(--font-bsg-lora), serif; font-size:3.5rem; font-weight:700; color:var(--gold); line-height:1; }
+    #baby-sleep-guide-root .price-note { color:rgba(255,255,255,.5); font-size:.85rem; margin-top:8px; }
+    #baby-sleep-guide-root .btn-offer {
+      display:inline-flex; align-items:center; gap:12px;
+      background:var(--gold); color:var(--navy);
+      font-weight:800; font-size:1.15rem;
+      padding:20px 44px; border-radius:50px;
+      text-decoration:none;
+      box-shadow:0 12px 40px rgba(245,166,35,.4);
+      transition: background .2s, transform .2s, box-shadow .2s;
+      margin-bottom:20px;
+    }
+    #baby-sleep-guide-root .btn-offer:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 16px 48px rgba(245,166,35,.5); }
+    #baby-sleep-guide-root .offer-trust { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-top:16px; }
+    #baby-sleep-guide-root .trust-item { display:flex; align-items:center; gap:6px; font-size:.82rem; color:rgba(255,255,255,.55); }
+    #baby-sleep-guide-root .offer-includes { text-align:left; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:24px; margin-bottom:36px; }
+    #baby-sleep-guide-root .offer-includes h4 { color:var(--gold); font-size:.9rem; margin-bottom:14px; letter-spacing:1px; text-transform:uppercase; }
+    #baby-sleep-guide-root .include-item { display:flex; align-items:center; gap:10px; font-size:.92rem; color:rgba(255,255,255,.8); padding:6px 0; border-bottom:1px solid rgba(255,255,255,.06); }
+    #baby-sleep-guide-root .include-item:last-child { border-bottom:none; }
+    #baby-sleep-guide-root .include-item .check { color:#4ade80; font-size:1rem; }
+
+    /* ── GUARANTEE ────────────────────────────────────── */
+    #baby-sleep-guide-root .guarantee { background: var(--light); }
+    #baby-sleep-guide-root .guarantee-box { max-width:700px; margin:0 auto; background:var(--white); border-radius:24px; padding:48px; box-shadow:0 8px 40px rgba(0,0,0,.07); text-align:center; }
+    #baby-sleep-guide-root .guarantee-icon { font-size:4rem; margin-bottom:16px; display:block; }
+    #baby-sleep-guide-root .guarantee-box h2 { color:var(--navy); margin-bottom:16px; }
+    #baby-sleep-guide-root .guarantee-box p { font-size:1rem; color:var(--muted); line-height:1.75; }
+    #baby-sleep-guide-root .guarantee-box strong { color:var(--navy); }
+
+    /* ── FAQ ──────────────────────────────────────────── */
+    #baby-sleep-guide-root .faq { background: var(--white); }
+    #baby-sleep-guide-root .faq-list { max-width:740px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+    #baby-sleep-guide-root .faq-item { border:1.5px solid #e3edf8; border-radius:14px; overflow:hidden; transition:border-color .2s; }
+    #baby-sleep-guide-root .faq-item.open { border-color:var(--mid); }
+    #baby-sleep-guide-root .faq-q { width:100%; text-align:left; background:none; border:none; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; cursor:pointer; font-family: var(--font-bsg-lora), serif; font-size:1rem; color:var(--navy); font-weight:600; }
+    #baby-sleep-guide-root .faq-q svg { flex-shrink:0; width:20px; height:20px; color:var(--mid); transition:transform .25s; }
+    #baby-sleep-guide-root .faq-item.open .faq-q svg { transform:rotate(180deg); }
+    #baby-sleep-guide-root .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease, padding .35s; padding:0 24px; }
+    #baby-sleep-guide-root .faq-item.open .faq-a { max-height:300px; padding:0 24px 20px; }
+    #baby-sleep-guide-root .faq-a p { font-size:.95rem; color:var(--muted); line-height:1.75; }
+
+    /* ── FINAL CTA ────────────────────────────────────── */
+    #baby-sleep-guide-root .final-cta { background:linear-gradient(135deg, #0d1b2a 0%, #112035 100%); text-align:center; padding:100px 24px; }
+    #baby-sleep-guide-root .final-cta h2 { font-size:clamp(1.8rem,4vw,2.8rem); color:var(--white); margin-bottom:20px; }
+    #baby-sleep-guide-root .final-cta h2 span { color:var(--gold); }
+    #baby-sleep-guide-root .final-cta p { color:rgba(255,255,255,.65); font-size:1.05rem; max-width:560px; margin:0 auto 40px; line-height:1.7; }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    #baby-sleep-guide-root footer { background:#080f18; padding:32px 24px; text-align:center; color:rgba(255,255,255,.35); font-size:.82rem; line-height:1.8; }
+    #baby-sleep-guide-root footer a { color:rgba(255,255,255,.45); text-decoration:none; }
+    #baby-sleep-guide-root footer a:hover { color:var(--gold); }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width:900px) {
+      #baby-sleep-guide-root .hero-inner { grid-template-columns:1fr; }
+      #baby-sleep-guide-root .hero-img-wrap { display:none; }
+      #baby-sleep-guide-root .hero-text { padding-bottom:48px; }
+      #baby-sleep-guide-root .pain-grid, #baby-sleep-guide-root .product-layout, #baby-sleep-guide-root .plan-layout { grid-template-columns:1fr; }
+      #baby-sleep-guide-root .pain-img { order:-1; }
+      #baby-sleep-guide-root .why-cards { grid-template-columns:1fr; }
+      #baby-sleep-guide-root .inside-grid { grid-template-columns:1fr 1fr; }
+      #baby-sleep-guide-root .numbers-grid { grid-template-columns:1fr; max-width:360px; }
+      #baby-sleep-guide-root .testi-grid { grid-template-columns:1fr; }
+      #baby-sleep-guide-root .offer-box { padding:40px 24px; }
+      #baby-sleep-guide-root .plan-img { display:none; }
+    }
+    @media (max-width:600px) {
+      #baby-sleep-guide-root section { padding:60px 20px; }
+      #baby-sleep-guide-root .inside-grid { grid-template-columns:1fr; }
+      #baby-sleep-guide-root .hero-stats { flex-direction:column; }
+      #baby-sleep-guide-root .hero-stat { border-right:none; border-bottom:1px solid #e8f0fb; }
+      #baby-sleep-guide-root .hero-stat:last-child { border-bottom:none; }
+    }
+
+    /* ── ANIMATIONS ───────────────────────────────────── */
+    #baby-sleep-guide-root .fade-up { opacity:0; transform:translateY(28px); transition:opacity .6s ease, transform .6s ease; }
+    #baby-sleep-guide-root .fade-up.visible { opacity:1; transform:translateY(0); }
+
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0   rgba(245,166,35,.5); }
+      70%  { box-shadow: 0 0 0 18px rgba(245,166,35,0); }
+      100% { box-shadow: 0 0 0 0   rgba(245,166,35,0); }
+    }
+    #baby-sleep-guide-root .btn-offer { animation: pulse-ring 2.5s infinite; }
+  

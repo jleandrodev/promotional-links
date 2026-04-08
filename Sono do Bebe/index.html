@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12 Hours of Sleep — A Gentle Guide to Help Your Baby Sleep Through the Night</title>
+  <meta name="description" content="A gentle, practical guide to help your baby sleep 12 hours through the night. Proven methods with results in 7–10 days." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #0d1b2a;
+      --blue:  #1a4a7a;
+      --mid:   #2b7de9;
+      --sky:   #e8f4ff;
+      --gold:  #f5a623;
+      --gold2: #e09312;
+      --white: #ffffff;
+      --text:  #2c3e50;
+      --muted: #6b7c93;
+      --light: #f7fbff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+    h1,h2,h3,h4 { font-family: 'Lora', serif; line-height: 1.2; }
+
+    /* ── HEADER ──────────────────────────────────────── */
+    .site-header {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--navy);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 20px rgba(0,0,0,.4);
+    }
+    .logo { font-family:'Lora',serif; color:var(--white); font-size:1.1rem; font-weight:600; letter-spacing:.5px; }
+    .logo span { color: var(--gold); }
+    .btn-header {
+      background: var(--gold); color: var(--navy);
+      font-weight:700; font-size:.85rem;
+      padding:10px 22px; border-radius:50px;
+      text-decoration:none; white-space:nowrap;
+      transition: background .2s, transform .2s;
+    }
+    .btn-header:hover { background:var(--gold2); transform:translateY(-1px); }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 60%, #0f2a44 100%);
+      padding: 80px 24px 0; overflow: hidden; position: relative;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(43,125,233,.15) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .hero-inner {
+      max-width:1100px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:48px; align-items:end;
+    }
+    .hero-text { padding-bottom: 64px; }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(245,166,35,.15); border:1px solid rgba(245,166,35,.4);
+      color:var(--gold); font-size:.8rem; font-weight:600;
+      padding:6px 14px; border-radius:50px; margin-bottom:24px;
+      letter-spacing:.5px; text-transform:uppercase;
+    }
+    .hero h1 { font-size:clamp(2rem,4vw,3rem); color:var(--white); margin-bottom:20px; line-height:1.15; }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub { font-size:1.1rem; color:rgba(255,255,255,.75); line-height:1.7; margin-bottom:36px; max-width:480px; }
+    .btn-hero {
+      display:inline-flex; align-items:center; gap:10px;
+      background:var(--gold); color:var(--navy);
+      font-weight:800; font-size:1.1rem;
+      padding:18px 36px; border-radius:50px;
+      text-decoration:none;
+      box-shadow:0 8px 32px rgba(245,166,35,.45);
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-hero:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 12px 40px rgba(245,166,35,.55); }
+    .hero-note { margin-top:14px; font-size:.82rem; color:rgba(255,255,255,.45); display:flex; align-items:center; gap:6px; }
+    .hero-img-wrap { display:flex; align-items:flex-end; justify-content:center; }
+    .hero-img-wrap img { width:100%; max-width:480px; border-radius:20px 20px 0 0; object-fit:cover; display:block; box-shadow:0 -20px 60px rgba(43,125,233,.2); }
+    .hero-stats {
+      display:flex; background:var(--white);
+      border-radius:16px; overflow:hidden;
+      box-shadow:0 8px 40px rgba(0,0,0,.15);
+      margin: 0 24px;
+    }
+    .hero-stat { flex:1; text-align:center; padding:20px 12px; border-right:1px solid #e8f0fb; }
+    .hero-stat:last-child { border-right:none; }
+    .hero-stat .num { font-family:'Lora',serif; font-size:1.8rem; font-weight:700; color:var(--blue); }
+    .hero-stat .lbl { font-size:.75rem; color:var(--muted); margin-top:2px; line-height:1.3; }
+
+    /* ── SECTION BASE ─────────────────────────────────── */
+    section { padding:80px 24px; }
+    .container { max-width:1080px; margin:0 auto; }
+    .section-tag {
+      display:inline-block; background:var(--sky); color:var(--mid);
+      font-size:.75rem; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; padding:5px 14px; border-radius:50px; margin-bottom:16px;
+    }
+    .section-title { font-size:clamp(1.7rem,3.5vw,2.4rem); color:var(--navy); margin-bottom:16px; max-width:700px; }
+    .section-sub { font-size:1.05rem; color:var(--muted); line-height:1.75; max-width:640px; margin-bottom:48px; }
+
+    /* ── PAIN ─────────────────────────────────────────── */
+    .pain { background: var(--light); }
+    .pain-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+    .pain-img img { width:100%; border-radius:20px; object-fit:cover; box-shadow:0 16px 48px rgba(13,27,42,.12); }
+    .pain-list { list-style:none; display:flex; flex-direction:column; gap:18px; }
+    .pain-list li { display:flex; gap:14px; align-items:flex-start; font-size:1.02rem; color:var(--text); line-height:1.6; }
+    .pain-list li .icon { flex-shrink:0; width:36px; height:36px; background:#fff1f1; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+    .pain-highlight {
+      background:linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius:16px; padding:24px 28px; margin-top:32px;
+      color:var(--white); font-size:1rem; line-height:1.65; font-style:italic;
+    }
+    .pain-highlight strong { color:var(--gold); font-style:normal; }
+
+    /* ── WHY ──────────────────────────────────────────── */
+    .why { background: var(--white); }
+    .why-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    .why-card {
+      background:var(--sky); border-radius:16px; padding:28px;
+      border-left:4px solid var(--mid);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .why-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(43,125,233,.12); }
+    .why-card .why-icon { width:48px; height:48px; background:var(--mid); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:16px; }
+    .why-card h4 { font-size:1.05rem; color:var(--navy); margin-bottom:10px; }
+    .why-card p { font-size:.92rem; color:var(--muted); line-height:1.65; }
+    .why-note {
+      background:linear-gradient(135deg, #1a4a7a, #2b7de9);
+      border-radius:16px; padding:24px 32px; margin-top:32px;
+      display:flex; align-items:center; gap:16px; color:var(--white);
+    }
+    .why-note .check { font-size:1.8rem; flex-shrink:0; }
+    .why-note p { font-size:1rem; line-height:1.6; }
+    .why-note strong { color:var(--gold); }
+
+    /* ── PRODUCT ──────────────────────────────────────── */
+    .product { background: var(--navy); overflow:hidden; }
+    .product .section-tag { background:rgba(245,166,35,.15); color:var(--gold); }
+    .product .section-title { color:var(--white); max-width:100%; }
+    .product .section-sub { color:rgba(255,255,255,.65); }
+    .product-layout { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .product-mockup { position:relative; display:flex; justify-content:center; }
+    .product-mockup img { width:100%; max-width:380px; border-radius:20px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+    .product-badge {
+      position:absolute; top:-16px; right:-10px;
+      background:var(--gold); color:var(--navy);
+      font-weight:800; font-size:.9rem; padding:10px 18px;
+      border-radius:50px; box-shadow:0 8px 24px rgba(245,166,35,.4);
+      transform:rotate(8deg);
+    }
+    .product-features { display:flex; flex-direction:column; gap:20px; }
+    .feat { display:flex; gap:16px; align-items:flex-start; }
+    .feat-icon { flex-shrink:0; width:44px; height:44px; background:rgba(43,125,233,.2); border:1px solid rgba(43,125,233,.4); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
+    .feat-text h4 { color:var(--white); font-size:1rem; margin-bottom:4px; }
+    .feat-text p { color:rgba(255,255,255,.6); font-size:.9rem; line-height:1.55; }
+
+    /* ── INSIDE ───────────────────────────────────────── */
+    .inside { background: var(--light); }
+    .inside-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .inside-card {
+      background:var(--white); border-radius:16px; padding:28px 24px;
+      box-shadow:0 4px 20px rgba(0,0,0,.06);
+      transition: transform .2s, box-shadow .2s;
+      position:relative; overflow:hidden;
+    }
+    .inside-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--mid), var(--blue)); }
+    .inside-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,.1); }
+    .inside-num { font-family:'Lora',serif; font-size:3rem; font-weight:700; color:var(--sky); line-height:1; margin-bottom:8px; }
+    .inside-card h4 { font-size:1rem; color:var(--navy); margin-bottom:10px; }
+    .inside-card p { font-size:.88rem; color:var(--muted); line-height:1.6; }
+
+    /* ── PLAN ─────────────────────────────────────────── */
+    .plan { background: var(--white); }
+    .plan-layout { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .timeline { display:flex; flex-direction:column; }
+    .tl-item { display:flex; gap:20px; }
+    .tl-left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+    .tl-dot { width:36px; height:36px; background:var(--mid); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.85rem; font-weight:700; color:var(--white); box-shadow:0 0 0 5px var(--sky); flex-shrink:0; }
+    .tl-connector { flex:1; width:2px; background:linear-gradient(180deg, var(--mid), #c8dff8); margin:6px 0; min-height:24px; }
+    .tl-item:last-child .tl-connector { display:none; }
+    .tl-content { padding-bottom:32px; padding-top:6px; }
+    .tl-item:last-child .tl-content { padding-bottom:0; }
+    .tl-item h4 { font-size:1rem; color:var(--navy); margin-bottom:6px; }
+    .tl-item p { font-size:.9rem; color:var(--muted); line-height:1.6; }
+    .plan-img img { width:100%; border-radius:20px; object-fit:cover; box-shadow:0 16px 48px rgba(13,27,42,.1); }
+
+    /* ── NUMBERS ──────────────────────────────────────── */
+    .numbers { background:linear-gradient(135deg, #1a3a5c, #0d2540); padding:80px 24px; }
+    .numbers-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:800px; margin:0 auto; text-align:center; }
+    .num-item { padding:40px 24px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:16px; }
+    .num-item .big { font-family:'Lora',serif; font-size:3.5rem; font-weight:700; color:var(--gold); display:block; }
+    .num-item .desc { font-size:.9rem; color:rgba(255,255,255,.7); margin-top:6px; line-height:1.4; }
+
+    /* ── TESTIMONIALS ─────────────────────────────────── */
+    .testimonials { background: var(--sky); }
+    .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .testi-card { background:var(--white); border-radius:16px; padding:28px 24px; box-shadow:0 4px 20px rgba(0,0,0,.06); }
+    .stars { color:#f5a623; font-size:1.1rem; margin-bottom:14px; letter-spacing:2px; }
+    .testi-card p { font-size:.95rem; color:var(--text); line-height:1.7; font-style:italic; margin-bottom:20px; }
+    .testi-author { display:flex; align-items:center; gap:12px; }
+    .testi-avatar { width:44px; height:44px; border-radius:50%; background:var(--sky); display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:700; color:var(--mid); font-family:'Lora',serif; }
+    .testi-name { font-weight:600; font-size:.92rem; color:var(--navy); }
+    .testi-info { font-size:.8rem; color:var(--muted); }
+
+    /* ── OFFER ────────────────────────────────────────── */
+    .offer { background:var(--white); text-align:center; }
+    .offer-box {
+      background:linear-gradient(135deg, #0d1b2a, #1a3a5c);
+      border-radius:32px; padding:64px 48px;
+      max-width:680px; margin:0 auto;
+      position:relative; overflow:hidden;
+    }
+    .offer-box::before { content:''; position:absolute; top:-100px; right:-100px; width:300px; height:300px; background:radial-gradient(circle, rgba(245,166,35,.12), transparent 70%); pointer-events:none; }
+    .offer-box .section-tag { background:rgba(245,166,35,.15); color:var(--gold); }
+    .offer-box .section-title { color:var(--white); margin:0 auto 16px; text-align:center; }
+    .offer-sub { color:rgba(255,255,255,.65); font-size:1rem; line-height:1.7; margin-bottom:36px; }
+    .price-block { margin-bottom:36px; }
+    .price-old { font-size:1rem; color:rgba(255,255,255,.4); text-decoration:line-through; margin-bottom:4px; }
+    .price-new { font-family:'Lora',serif; font-size:3.5rem; font-weight:700; color:var(--gold); line-height:1; }
+    .price-note { color:rgba(255,255,255,.5); font-size:.85rem; margin-top:8px; }
+    .btn-offer {
+      display:inline-flex; align-items:center; gap:12px;
+      background:var(--gold); color:var(--navy);
+      font-weight:800; font-size:1.15rem;
+      padding:20px 44px; border-radius:50px;
+      text-decoration:none;
+      box-shadow:0 12px 40px rgba(245,166,35,.4);
+      transition: background .2s, transform .2s, box-shadow .2s;
+      margin-bottom:20px;
+    }
+    .btn-offer:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 16px 48px rgba(245,166,35,.5); }
+    .offer-trust { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-top:16px; }
+    .trust-item { display:flex; align-items:center; gap:6px; font-size:.82rem; color:rgba(255,255,255,.55); }
+    .offer-includes { text-align:left; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:24px; margin-bottom:36px; }
+    .offer-includes h4 { color:var(--gold); font-size:.9rem; margin-bottom:14px; letter-spacing:1px; text-transform:uppercase; }
+    .include-item { display:flex; align-items:center; gap:10px; font-size:.92rem; color:rgba(255,255,255,.8); padding:6px 0; border-bottom:1px solid rgba(255,255,255,.06); }
+    .include-item:last-child { border-bottom:none; }
+    .include-item .check { color:#4ade80; font-size:1rem; }
+
+    /* ── GUARANTEE ────────────────────────────────────── */
+    .guarantee { background: var(--light); }
+    .guarantee-box { max-width:700px; margin:0 auto; background:var(--white); border-radius:24px; padding:48px; box-shadow:0 8px 40px rgba(0,0,0,.07); text-align:center; }
+    .guarantee-icon { font-size:4rem; margin-bottom:16px; display:block; }
+    .guarantee-box h2 { color:var(--navy); margin-bottom:16px; }
+    .guarantee-box p { font-size:1rem; color:var(--muted); line-height:1.75; }
+    .guarantee-box strong { color:var(--navy); }
+
+    /* ── FAQ ──────────────────────────────────────────── */
+    .faq { background: var(--white); }
+    .faq-list { max-width:740px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+    .faq-item { border:1.5px solid #e3edf8; border-radius:14px; overflow:hidden; transition:border-color .2s; }
+    .faq-item.open { border-color:var(--mid); }
+    .faq-q { width:100%; text-align:left; background:none; border:none; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; cursor:pointer; font-family:'Lora',serif; font-size:1rem; color:var(--navy); font-weight:600; }
+    .faq-q svg { flex-shrink:0; width:20px; height:20px; color:var(--mid); transition:transform .25s; }
+    .faq-item.open .faq-q svg { transform:rotate(180deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease, padding .35s; padding:0 24px; }
+    .faq-item.open .faq-a { max-height:300px; padding:0 24px 20px; }
+    .faq-a p { font-size:.95rem; color:var(--muted); line-height:1.75; }
+
+    /* ── FINAL CTA ────────────────────────────────────── */
+    .final-cta { background:linear-gradient(135deg, #0d1b2a 0%, #112035 100%); text-align:center; padding:100px 24px; }
+    .final-cta h2 { font-size:clamp(1.8rem,4vw,2.8rem); color:var(--white); margin-bottom:20px; }
+    .final-cta h2 span { color:var(--gold); }
+    .final-cta p { color:rgba(255,255,255,.65); font-size:1.05rem; max-width:560px; margin:0 auto 40px; line-height:1.7; }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer { background:#080f18; padding:32px 24px; text-align:center; color:rgba(255,255,255,.35); font-size:.82rem; line-height:1.8; }
+    footer a { color:rgba(255,255,255,.45); text-decoration:none; }
+    footer a:hover { color:var(--gold); }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width:900px) {
+      .hero-inner { grid-template-columns:1fr; }
+      .hero-img-wrap { display:none; }
+      .hero-text { padding-bottom:48px; }
+      .pain-grid, .product-layout, .plan-layout { grid-template-columns:1fr; }
+      .pain-img { order:-1; }
+      .why-cards { grid-template-columns:1fr; }
+      .inside-grid { grid-template-columns:1fr 1fr; }
+      .numbers-grid { grid-template-columns:1fr; max-width:360px; }
+      .testi-grid { grid-template-columns:1fr; }
+      .offer-box { padding:40px 24px; }
+      .plan-img { display:none; }
+    }
+    @media (max-width:600px) {
+      section { padding:60px 20px; }
+      .inside-grid { grid-template-columns:1fr; }
+      .hero-stats { flex-direction:column; }
+      .hero-stat { border-right:none; border-bottom:1px solid #e8f0fb; }
+      .hero-stat:last-child { border-bottom:none; }
+    }
+
+    /* ── ANIMATIONS ───────────────────────────────────── */
+    .fade-up { opacity:0; transform:translateY(28px); transition:opacity .6s ease, transform .6s ease; }
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0   rgba(245,166,35,.5); }
+      70%  { box-shadow: 0 0 0 18px rgba(245,166,35,0); }
+      100% { box-shadow: 0 0 0 0   rgba(245,166,35,0); }
+    }
+    .btn-offer { animation: pulse-ring 2.5s infinite; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HEADER ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="logo">Baby <span>Sleep</span> Guide</div>
+    <a href="https://pay.hotmart.com/H105232237N?checkoutMode=10" class="btn-header" target="_blank" rel="noopener">
+      Get the Guide Now →
+    </a>
+  </header>
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text fade-up">
+        <div class="hero-badge">🌙 Gentle Method · 7–10 Days</div>
+        <h1>
+          Your Baby Will Sleep<br />
+          <span>12 Hours Straight</span><br />
+          — Without Endless Crying
+        </h1>
+        <p class="hero-sub">
+          A practical, loving guide built on proven methods to transform your family's nights into real rest.
+          Gentle routines. Consistent results.
+        </p>
+        <a href="https://pay.hotmart.com/H105232237N?checkoutMode=10" class="btn-hero" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Yes, I Want to Start Tonight
+        </a>
+        <p class="hero-note">🔒 Secure checkout · Instant access · Hotmart</p>
+      </div>
+      <div class="hero-img-wrap fade-up">
+        <img src="Método suave para uma noite tranquila.png" alt="Gentle sleep method for a peaceful night" />
+      </div>
+    </div>
+    <div class="container" style="padding-top:0; padding-bottom:0; position:relative; z-index:2;">
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">90%</div>
+          <div class="lbl">Success rate with this method</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">7–10</div>
+          <div class="lbl">Days to see real results</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">12h</div>
+          <div class="lbl">Of uninterrupted sleep for baby</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PAIN ───────────────────────────────────────────── -->
+  <section class="pain">
+    <div class="container">
+      <div class="pain-grid">
+        <div class="pain-img fade-up">
+          <img src="Mãe e bebê em madrugada silenciosa.png" alt="Exhausted mother with baby at night" />
+        </div>
+        <div class="fade-up">
+          <div class="section-tag">Does this sound familiar?</div>
+          <h2 class="section-title">Exhausted. Every single night. With no end in sight.</h2>
+          <ul class="pain-list">
+            <li><span class="icon">😣</span><span>Your baby wakes up <strong>3, 4, 5 times a night</strong> and you simply can't take it anymore?</span></li>
+            <li><span class="icon">🍼</span><span>Nursing or bottle feeding has become the <strong>only way</strong> to get your baby back to sleep?</span></li>
+            <li><span class="icon">😴</span><span>You go to bed dreading the next time you'll hear crying?</span></li>
+            <li><span class="icon">😰</span><span>You've tried everything and nothing seems to <strong>stick</strong> for your baby?</span></li>
+            <li><span class="icon">💔</span><span>You feel guilty for wanting to sleep — like that somehow makes you a <strong>bad parent</strong>?</span></li>
+          </ul>
+          <div class="pain-highlight">
+            <strong>Sleep deprivation is not a sign of weakness.</strong> It affects your health, your bond with your baby, and everyone you love. You deserve to sleep — and so does your baby.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY ────────────────────────────────────────────── -->
+  <section class="why">
+    <div class="container">
+      <div class="section-tag" style="display:inline-block">Why won't baby sleep?</div>
+      <h2 class="section-title">The problem isn't your baby.<br/>It's the patterns they've learned.</h2>
+      <p class="section-sub">
+        Most night wakings aren't a behavior problem — they're learned patterns that can be gently reshaped with consistency and patience.
+      </p>
+      <div class="why-cards fade-up">
+        <div class="why-card">
+          <div class="why-icon">🍼</div>
+          <h4>Sleep Associations</h4>
+          <p>When babies learn to fall asleep only while feeding or rocking, they expect the same "password" when they naturally wake during the night.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">😵</div>
+          <h4>Overtiredness</h4>
+          <p>Missing nap windows causes babies to produce cortisol — the stress hormone — making it even harder to fall and stay asleep.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🕐</div>
+          <h4>Inconsistent Routine</h4>
+          <p>Without predictable daily patterns, babies don't develop internal sleep cues. Their bodies need consistency to regulate melatonin properly.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">☀️</div>
+          <h4>Daytime Sleep Imbalance</h4>
+          <p>Too little daytime sleep leads to overtiredness; too much or too-late naps interfere with nighttime sleep quality and duration.</p>
+        </div>
+      </div>
+      <div class="why-note fade-up">
+        <span class="check">✅</span>
+        <p>
+          <strong>The good news:</strong> all of these patterns are completely normal and entirely fixable. With gentle, consistent methods, most families see <strong>significant improvement within 7–10 days</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRODUCT ─────────────────────────────────────────── -->
+  <section class="product">
+    <div class="container">
+      <div class="product-layout">
+        <div class="product-mockup fade-up">
+          <div class="product-badge">Gentle Method 🌙</div>
+          <img src="Método suave para uma noite tranquila.png" alt="12 Hours of Sleep Guide" />
+        </div>
+        <div class="fade-up">
+          <div class="section-tag">The solution</div>
+          <h2 class="section-title" style="color:white">
+            12 Hours of Sleep: A Gentle &amp; Practical Guide to Help Your Baby Sleep Through the Night
+          </h2>
+          <p class="section-sub">
+            A complete, loving guide that combines the wisdom of Suzy Giordano and Lisa Abidin with gentle, proven methods that respect both your baby's needs and your family's wellbeing.
+          </p>
+          <div class="product-features">
+            <div class="feat">
+              <div class="feat-icon">🌙</div>
+              <div class="feat-text">
+                <h4>Structured Daily Routine</h4>
+                <p>Clear wake, nap, and bedtime schedules that naturally regulate your baby's internal clock.</p>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-icon">🧠</div>
+              <div class="feat-text">
+                <h4>Why Timing Matters</h4>
+                <p>Understand how melatonin and cortisol work — and use that knowledge to your advantage for calmer nights.</p>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-icon">🤝</div>
+              <div class="feat-text">
+                <h4>Independent Sleep Without Abandonment</h4>
+                <p>Teaching your baby to sleep alone isn't abandoning them — it's giving them a life-long skill.</p>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-icon">📅</div>
+              <div class="feat-text">
+                <h4>7-Day Sleep Reset Plan</h4>
+                <p>A daily step-by-step roadmap to transform your family's nights without overwhelming anyone.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INSIDE ──────────────────────────────────────────── -->
+  <section class="inside">
+    <div class="container">
+      <div class="section-tag" style="display:inline-block">What's inside the guide</div>
+      <h2 class="section-title">Everything you need, all in one place</h2>
+      <p class="section-sub">Each chapter is written to be read quickly — even when you're exhausted at 2 AM.</p>
+      <div class="inside-grid fade-up">
+        <div class="inside-card">
+          <div class="inside-num">01</div>
+          <h4>Why Your Baby Wakes So Often</h4>
+          <p>Understand the real causes of night wakings and shift from guilt to solution.</p>
+        </div>
+        <div class="inside-card">
+          <div class="inside-num">02</div>
+          <h4>The Foundation: A Consistent Daily Routine</h4>
+          <p>Ideal wake, nap, and sleep windows for babies 6–18 months.</p>
+        </div>
+        <div class="inside-card">
+          <div class="inside-num">03</div>
+          <h4>The Power of Early Bedtime</h4>
+          <p>Why putting baby to bed earlier makes them sleep longer — and the signs of overtiredness to avoid.</p>
+        </div>
+        <div class="inside-card">
+          <div class="inside-num">04</div>
+          <h4>Teaching Independent Sleep</h4>
+          <p>The ideal wind-down routine, how to put baby down drowsy-but-awake, and how to handle protests gently.</p>
+        </div>
+        <div class="inside-card">
+          <div class="inside-num">05</div>
+          <h4>Reducing Night Feedings</h4>
+          <p>How to gradually cut night feeds without stress — plus guidance on when to check with your pediatrician.</p>
+        </div>
+        <div class="inside-card">
+          <div class="inside-num">06</div>
+          <h4>Handling Night Wakings</h4>
+          <p>How to respond to a waking baby without creating new problematic sleep associations.</p>
+        </div>
+        <div class="inside-card">
+          <div class="inside-num">07</div>
+          <h4>Daytime Sleep Matters Too</h4>
+          <p>A complete guide to quality naps that support great nighttime sleep.</p>
+        </div>
+        <div class="inside-card">
+          <div class="inside-num">08</div>
+          <h4>Common Mistakes Parents Make</h4>
+          <p>The 4 most common sleep pitfalls parents create without realizing — and how to avoid them.</p>
+        </div>
+        <div class="inside-card">
+          <div class="inside-num">09</div>
+          <h4>Your 7-Day Sleep Reset Plan</h4>
+          <p>A complete daily roadmap from Day 1 to Day 7, so you never feel lost in the process.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PLAN ────────────────────────────────────────────── -->
+  <section class="plan">
+    <div class="container">
+      <div class="plan-layout">
+        <div class="fade-up">
+          <div class="section-tag">The 7-day plan</div>
+          <h2 class="section-title">From chaos to rest in one week</h2>
+          <p class="section-sub">Each day builds on the previous. No rush, no pressure — but real, lasting results.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot">1</div>
+                <div class="tl-connector"></div>
+              </div>
+              <div class="tl-content">
+                <h4>Days 1–2: Establish the Routine</h4>
+                <p>Set consistent wake, nap, and bedtime windows. Start the 20-minute bedtime wind-down. This is the foundation — don't skip ahead.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot">2</div>
+                <div class="tl-connector"></div>
+              </div>
+              <div class="tl-content">
+                <h4>Days 3–4: Put Baby Down Awake</h4>
+                <p>Continue the routine and now place baby in the crib drowsy but awake. Expect some protest — it's normal. Consistency is everything.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot">3</div>
+                <div class="tl-connector"></div>
+              </div>
+              <div class="tl-content">
+                <h4>Days 5–6: Reduce Night Feedings</h4>
+                <p>Shorten feeds by 1–2 minutes. Wait 2–3 minutes before responding to wakings. Offer comfort without feeding whenever possible.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot">4</div>
+                <div class="tl-connector"></div>
+              </div>
+              <div class="tl-content">
+                <h4>Day 7: Maintain &amp; Celebrate</h4>
+                <p>Keep everything consistent. Improvement should already be visible. You are teaching your child a skill they'll carry for life.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-img fade-up">
+          <img src="Mãe e bebé ao amanhecer.png" alt="Happy mom and baby in the morning" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NUMBERS ─────────────────────────────────────────── -->
+  <section class="numbers">
+    <div class="container">
+      <h2 style="font-family:'Lora',serif; color:white; text-align:center; font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:48px;">
+        The numbers speak for themselves
+      </h2>
+      <div class="numbers-grid fade-up">
+        <div class="num-item">
+          <span class="big">90%</span>
+          <div class="desc">of babies improve with early bedtime</div>
+        </div>
+        <div class="num-item">
+          <span class="big">7–10</span>
+          <div class="desc">days to significant, consistent improvement</div>
+        </div>
+        <div class="num-item">
+          <span class="big">30 min</span>
+          <div class="desc">less time to fall asleep with an early bedtime</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ────────────────────────────────────── -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-tag" style="display:inline-block">Real stories</div>
+      <h2 class="section-title">Families who transformed their nights</h2>
+      <p class="section-sub">What parents are saying after applying the method for 7 days.</p>
+      <div class="testi-grid fade-up">
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"My 8-month-old was waking up 5 times a night. On day 6 of the method, she slept 11 hours straight for the first time. I cried — out of pure joy and relief."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">A</div>
+            <div>
+              <div class="testi-name">Amanda L.</div>
+              <div class="testi-info">Mom of Valentina, 8 months</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"I didn't believe it could work without a lot of crying. But the method is truly gentle. By day 8, my 10-month-old was sleeping from 7 PM to 7 AM on his own."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">C</div>
+            <div>
+              <div class="testi-name">Claire M.</div>
+              <div class="testi-info">Mom of Noah, 10 months</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"The guide is clear, practical, and it works. I'd tried other approaches and nothing stuck. This 7-day routine completely changed our family. Everyone sleeps now."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div>
+              <div class="testi-name">Sarah K.</div>
+              <div class="testi-info">Mom of Isabelle, 13 months</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OFFER ───────────────────────────────────────────── -->
+  <section class="offer">
+    <div class="container">
+      <div class="offer-box fade-up">
+        <div class="section-tag">Special offer</div>
+        <h2 class="section-title">Start tonight.<br/>Sleep better within a week.</h2>
+        <p class="offer-sub">
+          Instant access to the complete guide with everything you need to transform your baby's nights — and your entire family's sleep.
+        </p>
+        <div class="offer-includes">
+          <h4>📦 What you get</h4>
+          <div class="include-item"><span class="check">✓</span> Full "12 Hours of Sleep" Guide (PDF)</div>
+          <div class="include-item"><span class="check">✓</span> Step-by-step 7-day sleep reset plan</div>
+          <div class="include-item"><span class="check">✓</span> Daily routine for babies 6–18 months</div>
+          <div class="include-item"><span class="check">✓</span> Methods to gradually reduce night feedings</div>
+          <div class="include-item"><span class="check">✓</span> Complete daytime nap guide</div>
+          <div class="include-item"><span class="check">✓</span> Instant access after purchase</div>
+        </div>
+        <div class="price-block">
+          <div class="price-old">From $37.00</div>
+          <div class="price-new">$19.00</div>
+          <div class="price-note">One-time payment · No subscription</div>
+        </div>
+        <a href="https://pay.hotmart.com/H105232237N?checkoutMode=10" class="btn-offer" target="_blank" rel="noopener">
+          🌙 I Want to Sleep This Week
+        </a>
+        <div class="offer-trust">
+          <div class="trust-item">🔒 100% Secure checkout</div>
+          <div class="trust-item">⚡ Instant access</div>
+          <div class="trust-item">🛡️ Hotmart platform</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GUARANTEE ───────────────────────────────────────── -->
+  <section class="guarantee">
+    <div class="container">
+      <div class="guarantee-box fade-up">
+        <span class="guarantee-icon">🛡️</span>
+        <h2 class="section-title" style="margin:0 auto 16px; max-width:100%; text-align:center;">
+          Satisfaction Guarantee
+        </h2>
+        <p>
+          If for any reason you're not satisfied with the guide's content,
+          <strong>simply contact us within Hotmart's refund window</strong> to request a full refund.
+          No hassle. No questions asked. Because we genuinely believe in the results this method delivers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ────────────────────────────────────────────── -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-tag" style="display:inline-block; margin-bottom:16px;">FAQ</div>
+      <h2 class="section-title" style="margin-bottom:40px;">Still have questions? We've got answers.</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">
+            What age range does this method work for?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><p>The guide is specifically designed for babies 6–18 months old. At this stage, babies no longer need night feedings for nutritional reasons and are developmentally ready to learn independent sleep skills.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            Will I have to let my baby cry it out?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><p>No. This method is called "gentle" precisely because it does not use the cry-it-out technique. There may be some initial protest — that's normal for any new skill — but you never leave your baby alone. You encourage them with presence and consistency.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            How long until I see results?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><p>Most families see significant improvement within 7–10 days of consistent application. Some babies respond faster; others may take a bit longer. The key is consistency — especially in the first few days.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            Does it work for breastfeeding babies?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><p>Yes. The guide includes a dedicated chapter on how to gradually reduce night nursing sessions, always with the guidance to consult your pediatrician first — especially for babies under 12 months.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            How do I receive the guide after purchasing?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><p>Access is instant! Right after Hotmart confirms your payment, you'll receive an email with a link to download the PDF guide. You can access it on your phone, tablet, or computer — anytime, anywhere.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            What if I try it and it doesn't work?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><p>Your purchase is covered by Hotmart's refund policy. If you apply the method and aren't satisfied, simply request a refund within the stated window. No questions, no hassle.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ───────────────────────────────────────── -->
+  <section class="final-cta">
+    <div class="container">
+      <img src="Mãe e filho num abraço tranquilo.png" alt="Peaceful mom and baby" style="width:160px; height:160px; object-fit:cover; border-radius:50%; margin:0 auto 32px; display:block; border:4px solid rgba(245,166,35,.4); box-shadow:0 0 40px rgba(245,166,35,.2);" />
+      <h2>
+        Imagine waking up tomorrow<br />
+        <span>rested. Peaceful. With your baby.</span>
+      </h2>
+      <p>
+        This isn't a fantasy. It's what happens when you follow a gentle, proven method and give your child the sleep skill they'll carry for life.
+      </p>
+      <a href="https://pay.hotmart.com/H105232237N?checkoutMode=10" class="btn-offer" target="_blank" rel="noopener" style="display:inline-flex; margin-bottom:16px;">
+        🌙 Yes, I'm Ready to Transform Our Nights
+      </a>
+      <p style="color:rgba(255,255,255,.35); font-size:.85rem; margin-top:8px;">
+        🔒 Secure checkout · Instant access · Hotmart
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────── -->
+  <footer>
+    <p>© 2026 Baby Sleep Guide · All rights reserved</p>
+    <p style="margin-top:6px;">
+      For educational purposes only. Always consult your pediatrician before modifying your baby's nighttime feeding routine.
+    </p>
+  </footer>
+
+  <!-- ── SCRIPTS ─────────────────────────────────────────── -->
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

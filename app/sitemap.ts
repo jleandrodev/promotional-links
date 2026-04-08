@@ -97,6 +97,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'monthly',
         priority: 0.7,
       },
+      {
+        url: `${baseUrl}/baby-sleep-guide`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      },
       // Páginas institucionais
       {
         url: `${baseUrl}/privacy-policy`,
