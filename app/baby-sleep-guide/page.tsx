@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 const CHECKOUT =
-  'https://pay.hotmart.com/H105232237N?checkoutMode=10'
+  'https://pay.hotmart.com/H105232237N?off=cduhamyx&checkoutMode=10'
 const IMG = {
   hero: '/baby-sleep-guide/hero-product.png',
   pain: '/baby-sleep-guide/pain.png',
@@ -594,7 +594,7 @@ export default function BabySleepGuidePage() {
             </div>
             <div className="price-block">
               <div className="price-old">From $37.00</div>
-              <div className="price-new">$19.00</div>
+              <div className="price-new">$19.90</div>
               <div className="price-note">One-time payment · No subscription</div>
             </div>
             <a
