@@ -160,6 +160,14 @@ export default async function Footer() {
                   Terms of Service
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/terms-and-conditions"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Terms and Conditions
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
