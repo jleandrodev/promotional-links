@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import LanguageSwitcher from './LanguageSwitcher'
 
 interface Category {
   id: string
@@ -83,13 +84,16 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* CTA Button Desktop */}
-          <Link
-            href="/products"
-            className="hidden md:block rounded-lg bg-[#086972] px-6 py-2 text-white hover:bg-[#0b95a2] transition-colors"
-          >
-            Shop Now
-          </Link>
+          {/* Language Switcher + CTA Button Desktop */}
+          <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
+            <Link
+              href="/products"
+              className="rounded-lg bg-[#086972] px-6 py-2 text-white hover:bg-[#0b95a2] transition-colors"
+            >
+              Shop Now
+            </Link>
+          </div>
 
           {/* Botão Hambúrguer Mobile */}
           <button
@@ -163,6 +167,9 @@ export default function Header() {
                 >
                   Shop Now
                 </Link>
+                <div className="pt-2 border-t border-gray-100">
+                  <LanguageSwitcher />
+                </div>
               </div>
             </nav>
           </>

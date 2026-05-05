@@ -63,6 +63,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="referrer" content="no-referrer-when-downgrade" />
+        <style>{`
+          .goog-te-banner-frame, .goog-te-balloon-frame { display: none !important; }
+          body { top: 0 !important; }
+          .goog-te-menu-value span { color: #053d42; }
+          .goog-tooltip { display: none !important; }
+        `}</style>
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <Script
@@ -93,6 +99,20 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         )}
+        {/* Google Translate – hidden widget, controlled via cookie */}
+        <div id="google_translate_element" style={{ display: 'none' }} />
+        <Script id="google-translate-init" strategy="afterInteractive">{`
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+              { pageLanguage: 'en', includedLanguages: 'en,es', autoDisplay: false },
+              'google_translate_element'
+            );
+          }
+        `}</Script>
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
         {children}
         <CookieBanner />
       </body>
