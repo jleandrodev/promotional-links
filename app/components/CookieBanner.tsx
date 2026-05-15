@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -80,7 +81,10 @@ function saveConsent(consent: CookieConsent) {
 }
 
 export function CookieBanner() {
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
+
+  if (pathname === '/powerpet') return null;
   const [showDetails, setShowDetails] = useState(false);
   const [preferences, setPreferences] = useState<CookieConsent>(DEFAULT_CONSENT);
 
