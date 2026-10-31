@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,7 +8,7 @@ import Pagination from '../../components/Pagination'
 import ProfitableCpmNetworkBanner from '../../components/ProfitableCpmNetworkBanner'
 import { getCategoryBySlug, getCategories } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
-import Script from 'next/script'
+import { SITE_URL } from '@/lib/site'
 
 export async function generateStaticParams() {
   try {
@@ -47,6 +48,7 @@ export async function generateMetadata({
     alternates: {
       canonical,
     },
+    ...(page && page !== '1' && { robots: { index: false, follow: true } }),
     openGraph: {
       title: category.seoTitle || `${category.name} - NutraHub`,
       description: category.seoDescription || category.description || `Explore ${category.name} articles and guides`,
@@ -68,6 +70,7 @@ export default async function CategoryPage({
   const { slug } = await params
   const paramsSearch = await searchParams
   const currentPage = parseInt(paramsSearch.page || '1', 10)
+  if (!Number.isInteger(currentPage) || currentPage < 1) notFound()
   const postsPerPage = 9
 
   const category = await getCategoryBySlug(slug).catch(() => null)
@@ -84,13 +87,14 @@ export default async function CategoryPage({
   const startIndex = (currentPage - 1) * postsPerPage
   const endIndex = startIndex + postsPerPage
   const paginatedPosts = allPosts.slice(startIndex, endIndex)
+  if (currentPage > 1 && paginatedPosts.length === 0) notFound()
 
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: category.name,
     description: category.description,
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'}/categories/${category.slug}`,
+    url: `${SITE_URL}/categories/${category.slug}`,
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: allPosts.map((post, index) => ({
@@ -100,7 +104,7 @@ export default async function CategoryPage({
           '@type': 'Article',
           headline: post.title,
           description: post.excerpt,
-          url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'}/blog/${post.slug}`,
+          url: `${SITE_URL}/blog/${post.slug}`,
         },
       })),
     },
@@ -108,7 +112,7 @@ export default async function CategoryPage({
 
   return (
     <>
-      <Script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
@@ -128,7 +132,13 @@ export default async function CategoryPage({
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                {paginatedPosts.map((post) => (
+                {paginatedPosts.map((post, index) => (
+                  <Fragment key={post.id}>
+                  {index === 6 && (
+                    <div className="col-span-full">
+                      <ProfitableCpmNetworkBanner omitContainerDomId />
+                    </div>
+                  )}
                   <article
                     key={post.id}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
@@ -157,6 +167,7 @@ export default async function CategoryPage({
                       </div>
                     </Link>
                   </article>
+                  </Fragment>
                 ))}
               </div>
 

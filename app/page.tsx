@@ -9,6 +9,7 @@ import NewsletterSection from './components/NewsletterSection'
 import Footer from './components/Footer'
 import { getBlogPosts, getCategories, getProducts, getHomeContent } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 export async function generateMetadata({
   searchParams,
@@ -25,6 +26,7 @@ export async function generateMetadata({
       'Discover natural health solutions, expert guides, and quality supplements. Your trusted source for evidence-based wellness information.',
     keywords: 'natural health, supplements, wellness, herbal remedies, health guides',
     alternates: { canonical },
+    ...(page !== '1' && { robots: { index: false, follow: true } }),
     openGraph: {
       title: 'NutraHub - Your Natural Health & Wellness Hub',
       description:
@@ -44,6 +46,7 @@ export default async function Home({
 }) {
   const params = await searchParams
   const currentPage = parseInt(params.page || '1', 10)
+  if (!Number.isInteger(currentPage) || currentPage < 1) notFound()
   const postsPerPage = 9
 
   const [allPosts, categories, products, homeContent] = await Promise.all([
@@ -59,6 +62,7 @@ export default async function Home({
   const startIndex = (currentPage - 1) * postsPerPage
   const endIndex = startIndex + postsPerPage
   const paginatedPosts = allPosts.slice(startIndex, endIndex)
+  if (currentPage > 1 && paginatedPosts.length === 0) notFound()
 
   // Get featured posts for carousel (first 3)
   const featuredPosts = allPosts.slice(0, 3)

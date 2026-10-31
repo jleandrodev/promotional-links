@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Aprende cómo preparar deliciosas recetas caseras de snacks para mascotas y empieza a facturar hasta mil dólares al mes desde casa.',
   alternates: { canonical: '/powerpet' },
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Manual Power Pet – Recetas Caseras para Mascotas',
     description:

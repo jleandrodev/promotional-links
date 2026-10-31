@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import { getProducts } from '@/lib/supabase/queries'
 import ProfitableCpmNetworkBanner from '../components/ProfitableCpmNetworkBanner'
 import type { Metadata } from 'next'
-import Script from 'next/script'
+import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Products - Natural Health Supplements',
@@ -33,7 +33,7 @@ export default async function ProductsPage() {
     name: product.name,
     description: product.description,
     image: product.image || '',
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'}/products/${product.slug}`,
+    url: `${SITE_URL}/products/${product.slug}`,
     price: product.price,
   }))
 
@@ -42,7 +42,7 @@ export default async function ProductsPage() {
     '@type': 'CollectionPage',
     name: 'Products - NutraHub',
     description: 'Natural health supplements and wellness products',
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'}/products`,
+    url: `${SITE_URL}/products`,
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: allProducts.map((product, index) => ({
@@ -62,7 +62,7 @@ export default async function ProductsPage() {
 
   return (
     <>
-      <Script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />

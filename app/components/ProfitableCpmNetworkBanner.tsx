@@ -47,7 +47,7 @@ export default function ProfitableCpmNetworkBanner({
     <div
       className={`flex w-full justify-center py-8 [&_iframe]:max-w-full ${className}`.trim()}
     >
-      <div ref={slotRef} id={omitContainerDomId ? undefined : containerId} />
+      <div ref={slotRef} id={omitContainerDomId ? undefined : containerId} style={{ minHeight: 100 }} />
     </div>
   )
 }

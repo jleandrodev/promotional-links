@@ -21,8 +21,7 @@ export default function TermsOfServicePage() {
       <h2>1. Responsible Party Identification</h2>
       <p>This website is managed by:</p>
       <p>
-        <strong>Full Name:</strong> Jhonatan Leandro Ozorio<br />
-        <strong>CPF:</strong> 079.945.189-40<br />
+        <strong>Name:</strong> NutraHub<br />
         <strong>Email:</strong> nutrahub.life@gmail.com<br />
         <strong>WhatsApp:</strong> +55 44 9722-7838
       </p>

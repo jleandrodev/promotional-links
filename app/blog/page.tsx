@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Header from '../components/Header'
@@ -6,6 +7,7 @@ import Pagination from '../components/Pagination'
 import ProfitableCpmNetworkBanner from '../components/ProfitableCpmNetworkBanner'
 import { getBlogPosts } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 export async function generateMetadata({
   searchParams,
@@ -22,6 +24,7 @@ export async function generateMetadata({
       'Read expert articles, guides, and research on natural health, supplements, and wellness. Evidence-based information to support your health journey.',
     keywords: 'health blog, wellness articles, natural health guides, supplement information',
     alternates: { canonical },
+    ...(page !== '1' && { robots: { index: false, follow: true } }),
     openGraph: {
       title: 'Blog - Natural Health Articles & Guides | NutraHub',
       description: 'Read expert articles, guides, and research on natural health and wellness.',
@@ -40,6 +43,7 @@ export default async function BlogPage({
 }) {
   const params = await searchParams
   const currentPage = parseInt(params.page || '1', 10)
+  if (!Number.isInteger(currentPage) || currentPage < 1) notFound()
   const postsPerPage = 9
 
   const allPosts = await getBlogPosts(1000) // Buscar todos os posts
@@ -50,6 +54,7 @@ export default async function BlogPage({
   const startIndex = (currentPage - 1) * postsPerPage
   const endIndex = startIndex + postsPerPage
   const paginatedPosts = allPosts.slice(startIndex, endIndex)
+  if (currentPage > 1 && paginatedPosts.length === 0) notFound()
 
   return (
     <>
@@ -72,7 +77,13 @@ export default async function BlogPage({
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                {paginatedPosts.map((post) => (
+                {paginatedPosts.map((post, index) => (
+                  <Fragment key={post.id}>
+                  {index === 6 && (
+                    <div className="col-span-full">
+                      <ProfitableCpmNetworkBanner omitContainerDomId />
+                    </div>
+                  )}
                   <article
                     key={post.id}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
@@ -113,6 +124,7 @@ export default async function BlogPage({
                       </div>
                     </Link>
                   </article>
+                  </Fragment>
                 ))}
               </div>
               {totalPages > 1 && (

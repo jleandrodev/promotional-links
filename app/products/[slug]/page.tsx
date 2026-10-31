@@ -4,7 +4,6 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import { getProductBySlug, getProducts } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
-import Script from 'next/script'
 
 export async function generateStaticParams() {
   try {
@@ -80,7 +79,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <Script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />

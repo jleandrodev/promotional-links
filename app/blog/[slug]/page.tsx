@@ -7,7 +7,15 @@ import AdsterraSidebarAds from '../../components/AdsterraSidebarAds'
 import ProfitableCpmNetworkBanner from '../../components/ProfitableCpmNetworkBanner'
 import { getBlogPostBySlug, getBlogPosts } from '@/lib/supabase/queries'
 import type { Metadata } from 'next'
-import Script from 'next/script'
+import InArticleAd from '../../components/InArticleAd'
+import { splitArticleForAds } from '@/lib/inject-ads'
+import { SITE_URL } from '@/lib/site'
+
+const stripHtml = (html?: string | null) =>
+  (html || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
+
+const truncate = (text: string, max: number) =>
+  text.length <= max ? text : text.slice(0, max - 1).replace(/\s+\S*$/, '') + '…'
 
 export async function generateStaticParams() {
   try {
@@ -42,19 +50,31 @@ export async function generateMetadata({
         : new Date(post.publishedAt).toISOString())
     : undefined
 
+  const baseTitle = post.seoTitle || post.title
+  const fullTitle = /nutrahub/i.test(baseTitle) ? baseTitle : `${baseTitle} | NutraHub`
+  const description = truncate(stripHtml(post.excerpt) || stripHtml(post.seoDescription), 160)
+
   return {
-    title: post.seoTitle || post.title,
-    description: post.seoDescription || post.excerpt,
+    title: { absolute: fullTitle },
+    description,
     keywords: post.seoKeywords || post.title,
     alternates: {
       canonical: `/blog/${slug}`,
     },
     openGraph: {
-      title: post.seoTitle || post.title,
-      description: post.seoDescription || post.excerpt,
+      title: baseTitle,
+      description,
+      url: `/blog/${slug}`,
+      siteName: 'NutraHub',
       images: post.featuredImage ? [post.featuredImage] : [],
       type: 'article',
       publishedTime,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: baseTitle,
+      description,
+      images: post.featuredImage ? [post.featuredImage] : [],
     },
   }
 }
@@ -86,32 +106,49 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    image: post.featuredImage,
+    ...(post.featuredImage && { image: [post.featuredImage] }),
     datePublished: publishedDate,
     dateModified: updatedDate,
     author: {
       '@type': 'Organization',
-      name: 'NutraHub',
+      name: 'NutraHub Editorial Team',
+      url: SITE_URL,
     },
     publisher: {
       '@type': 'Organization',
       name: 'NutraHub',
       logo: {
         '@type': 'ImageObject',
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'}/logo.png`,
+        url: `${SITE_URL}/images/logo.svg`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'}/blog/${post.slug}`,
+      '@id': `${SITE_URL}/blog/${post.slug}`,
     },
   }
 
+  const breadcrumbData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${SITE_URL}/blog/${post.slug}` },
+    ],
+  }
+
+  const segments = splitArticleForAds(post.content || '')
+
   return (
     <>
-      <Script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
       />
       <Header />
       <main className="min-h-screen">
@@ -156,21 +193,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       })}
                     </p>
                   )}
-                  <div
-                    className="blog-content max-w-none mb-12 lg:mb-0"
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                  />
+                  <div className="blog-content max-w-none mb-12 lg:mb-0">
+                    {segments.map((segment, i) => (
+                      <div key={i} className="contents">
+                        <div className="contents" dangerouslySetInnerHTML={{ __html: segment.html }} />
+                        {segment.adAfter && <InArticleAd />}
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Sidebar com card do produto - mobile abaixo do artigo, desktop ao lado */}
-                {post.product && (
-                  <aside className="w-full lg:w-64 flex-shrink-0 order-2 lg:order-1">
-                    <div className="lg:sticky lg:top-24 space-y-6">
-                      <ProductSidebarCard product={post.product} />
-                      <AdsterraSidebarAds />
-                    </div>
-                  </aside>
-                )}
+                <aside className="w-full lg:w-64 flex-shrink-0 order-2 lg:order-1">
+                  <div className="lg:sticky lg:top-24 space-y-6">
+                    {post.product && <ProductSidebarCard product={post.product} />}
+                    <AdsterraSidebarAds />
+                  </div>
+                </aside>
               </div>
             </div>
           </div>

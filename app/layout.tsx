@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { CookieBanner } from "./components/CookieBanner";
+import GoogleTranslateLoader from "./components/GoogleTranslateLoader";
+import { SITE_URL } from '@/lib/site'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com'),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -71,24 +73,21 @@ export default function RootLayout({
         `}</style>
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <Script
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'NutraHub',
-              url: process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com',
+              url: SITE_URL,
               description:
                 'Your trusted source for natural health and wellness products, backed by science and expert guidance.',
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: {
-                  '@type': 'EntryPoint',
-                  urlTemplate:
-                    (process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.com') + '/search?q={search_term_string}',
-                },
-                'query-input': 'required name=search_term_string',
+              publisher: {
+                '@type': 'Organization',
+                name: 'NutraHub',
+                url: SITE_URL,
+                logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/logo.svg` },
               },
             }),
           }}
@@ -99,20 +98,7 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         )}
-        {/* Google Translate – hidden widget, controlled via cookie */}
-        <div id="google_translate_element" style={{ display: 'none' }} />
-        <Script id="google-translate-init" strategy="afterInteractive">{`
-          function googleTranslateElementInit() {
-            new google.translate.TranslateElement(
-              { pageLanguage: 'en', includedLanguages: 'en,es', autoDisplay: false },
-              'google_translate_element'
-            );
-          }
-        `}</Script>
-        <Script
-          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="afterInteractive"
-        />
+        <GoogleTranslateLoader />
         {children}
         <CookieBanner />
       </body>

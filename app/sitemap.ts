@@ -1,17 +1,11 @@
 import { MetadataRoute } from 'next'
-import { headers } from 'next/headers'
 import { prisma } from '@/lib/prisma'
+import { SITE_URL } from '@/lib/site'
+
+const STATIC_LAST_MODIFIED = new Date('2026-10-31')
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Detectar o domínio da requisição atual ou usar a variável de ambiente
-  const headersList = await headers()
-  const host = headersList.get('host') || headersList.get('x-forwarded-host')
-  const protocol = headersList.get('x-forwarded-proto') || 'https'
-  
-  // Se houver host na requisição, usar ele; caso contrário, usar a variável de ambiente
-  const baseUrl = host 
-    ? `${protocol}://${host}`
-    : (process.env.NEXT_PUBLIC_SITE_URL || 'https://nutrahub.life')
+  const baseUrl = SITE_URL
 
   try {
     // Busca todos os dados em paralelo
@@ -56,75 +50,75 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticUrls: MetadataRoute.Sitemap = [
       {
         url: baseUrl,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'daily',
         priority: 1,
       },
       {
         url: `${baseUrl}/blog`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'daily',
         priority: 0.9,
       },
       {
         url: `${baseUrl}/categories`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'weekly',
         priority: 0.9,
       },
       {
         url: `${baseUrl}/products`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'weekly',
         priority: 0.9,
       },
       // Landing pages existentes
       {
         url: `${baseUrl}/femipro`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.7,
       },
       {
         url: `${baseUrl}/prodentim`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.7,
       },
       {
         url: `${baseUrl}/guia-do-sono-do-bebe`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.7,
       },
       {
         url: `${baseUrl}/baby-sleep-guide`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.7,
       },
       // Páginas institucionais
       {
         url: `${baseUrl}/privacy-policy`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.5,
       },
       {
         url: `${baseUrl}/about`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.5,
       },
       {
         url: `${baseUrl}/contact`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.5,
       },
       {
         url: `${baseUrl}/terms-of-service`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.5,
       },
@@ -162,49 +156,49 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return [
       {
         url: baseUrl,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'daily',
         priority: 1,
       },
       {
         url: `${baseUrl}/blog`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'daily',
         priority: 0.9,
       },
       {
         url: `${baseUrl}/categories`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'weekly',
         priority: 0.9,
       },
       {
         url: `${baseUrl}/products`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'weekly',
         priority: 0.9,
       },
       {
         url: `${baseUrl}/privacy-policy`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.5,
       },
       {
         url: `${baseUrl}/about`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.5,
       },
       {
         url: `${baseUrl}/contact`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.5,
       },
       {
         url: `${baseUrl}/terms-of-service`,
-        lastModified: new Date(),
+        lastModified: STATIC_LAST_MODIFIED,
         changeFrequency: 'monthly',
         priority: 0.5,
       },

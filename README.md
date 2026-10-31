@@ -41,7 +41,7 @@ A modern, SEO-optimized blog and product hub for natural health and wellness con
    
    # Para produção/Vercel (Connection Pooling - RECOMENDADO)
    # DATABASE_URL=postgresql://postgres.[PROJECT_REF]:[PASSWORD]@aws-0-[REGION].pooler.supabase.com:6543/postgres?pgbouncer=true
-   NEXT_PUBLIC_SITE_URL=https://nutrahub.com
+   NEXT_PUBLIC_SITE_URL=https://nutrahub.life
    ```
 
 3. **Set up Prisma:**

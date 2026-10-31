@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     'Descubre la receta de gelatina para apoyar tu metabolismo y tus objetivos de bienestar, con pasos claros y ingredientes accesibles.',
   alternates: { canonical: '/receta-gelatina-adelgazante' },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Receta de gelatina adelgazante',
     description:
