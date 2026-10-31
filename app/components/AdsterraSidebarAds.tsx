@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { enqueueBanner } from '@/lib/adsterra-queue'
 
 const UNITS = [
   {
@@ -15,69 +16,6 @@ const UNITS = [
   },
 ] as const
 
-type AtOptions = {
-  key: string
-  format: string
-  height: number
-  width: number
-  params: Record<string, never>
-}
-
-declare global {
-  interface Window {
-    atOptions?: AtOptions
-  }
-}
-
-/** Pausa entre unidades para o 1º invoke terminar antes de sobrescrever `atOptions`. */
-const PAUSE_MS_BETWEEN_UNITS = 800
-
-const LOAD_TIMEOUT_MS = 12_000
-
-function sleep(ms: number) {
-  return new Promise((r) => setTimeout(r, ms))
-}
-
-function loadInvokeInContainer(
-  container: HTMLDivElement,
-  unit: (typeof UNITS)[number],
-  signal: { aborted: boolean },
-): Promise<void> {
-  return new Promise((resolve) => {
-    let settled = false
-    const finish = () => {
-      if (settled) return
-      settled = true
-      window.clearTimeout(timeoutId)
-      resolve()
-    }
-
-    if (signal.aborted) {
-      finish()
-      return
-    }
-
-    window.atOptions = {
-      key: unit.key,
-      format: 'iframe',
-      height: unit.height,
-      width: unit.width,
-      params: {},
-    }
-
-    const script = document.createElement('script')
-    script.src = `https://www.highperformanceformat.com/${unit.key}/invoke.js`
-    script.async = true
-
-    const timeoutId = window.setTimeout(finish, LOAD_TIMEOUT_MS)
-
-    script.onload = finish
-    script.onerror = finish
-
-    container.appendChild(script)
-  })
-}
-
 export default function AdsterraSidebarAds() {
   const firstRef = useRef<HTMLDivElement>(null)
   const secondRef = useRef<HTMLDivElement>(null)
@@ -86,20 +24,9 @@ export default function AdsterraSidebarAds() {
     const containers = [firstRef.current, secondRef.current]
     const signal = { aborted: false }
 
-    ;(async () => {
-      for (let i = 0; i < UNITS.length; i++) {
-        if (signal.aborted) return
-        const container = containers[i]
-        if (!container) continue
-
-        await loadInvokeInContainer(container, UNITS[i], signal)
-
-        if (signal.aborted) return
-        if (i < UNITS.length - 1) {
-          await sleep(PAUSE_MS_BETWEEN_UNITS)
-        }
-      }
-    })()
+    containers.forEach((container, i) => {
+      if (container) void enqueueBanner(container, UNITS[i], signal)
+    })
 
     return () => {
       signal.aborted = true

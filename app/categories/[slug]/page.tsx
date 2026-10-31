@@ -1,3 +1,4 @@
+import InArticleAd from '../../components/InArticleAd'
 import { Fragment } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -138,7 +139,7 @@ export default async function CategoryPage({
                   <Fragment key={post.id}>
                   {index === 6 && (
                     <div className="col-span-full">
-                      <ProfitableCpmNetworkBanner omitContainerDomId />
+                      <InArticleAd />
                     </div>
                   )}
                   <article

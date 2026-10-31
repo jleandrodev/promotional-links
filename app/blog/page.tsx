@@ -1,3 +1,4 @@
+import InArticleAd from '../components/InArticleAd'
 import { Fragment } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -81,7 +82,7 @@ export default async function BlogPage({
                   <Fragment key={post.id}>
                   {index === 6 && (
                     <div className="col-span-full">
-                      <ProfitableCpmNetworkBanner omitContainerDomId />
+                      <InArticleAd />
                     </div>
                   )}
                   <article
