@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   keywords: 'natural supplements, health products, wellness, vitamins, herbal remedies',
   alternates: { canonical: '/products' },
   openGraph: {
-    title: 'Products - Natural Health Supplements | NutraHub',
+    title: 'Products - Natural Health Supplements',
     description: 'Browse our curated selection of natural health supplements and wellness products.',
     type: 'website',
   },

@@ -42,7 +42,9 @@ export async function generateMetadata({
   const canonical = !page || page === '1' ? `/categories/${slug}` : `/categories/${slug}?page=${page}`
 
   return {
-    title: category.seoTitle || `${category.name} - Health & Wellness Category`,
+    title: category.seoTitle
+      ? { absolute: /nutrahub/i.test(category.seoTitle) ? category.seoTitle : `${category.seoTitle} | NutraHub` }
+      : `${category.name} - Health & Wellness Category`,
     description: category.seoDescription || category.description || `Explore ${category.name} articles and guides on NutraHub`,
     keywords: `${category.name}, health, wellness, natural remedies`,
     alternates: {

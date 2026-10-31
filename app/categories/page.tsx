@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   keywords: 'health categories, wellness topics, natural remedies, health guides, supplements',
   alternates: { canonical: '/categories' },
   openGraph: {
-    title: 'Categories - Health & Wellness Topics | NutraHub',
+    title: 'Categories - Health & Wellness Topics',
     description: 'Explore our comprehensive categories covering natural health and wellness topics.',
     type: 'website',
   },

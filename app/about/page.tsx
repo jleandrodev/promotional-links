@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'About Us | NutraHub',
+  title: 'About Us',
   description:
     'Meet NutraHub: your trusted source for natural health, wellness, and evidence-based product recommendations.',
   alternates: {
